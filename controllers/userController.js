@@ -1,12 +1,10 @@
 const mongoose = require("mongoose")
 const User = require('../models/users.js')
 
-connectionString = process.env.DBSTRING + '/renters'
-
 // Get all users
 function getAllUsers(req, res) {
     User.find()
-    .select('_id name phone')
+    .select('_id name phone idcard status')
         .then((allUsers) => {
             return res.status(200).json({
                 success: true,

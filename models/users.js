@@ -5,9 +5,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    age: {
-        type: Number,
+    phone: {
+        type: String
     },
+    idcard: {
+        type: String
+    },
+    status: {
+        type: String
+    },
+    
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("User", userSchema, 'renters');
