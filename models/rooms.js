@@ -2,9 +2,11 @@ const mongoose = require("mongoose");
 const roomSchema = new mongoose.Schema({
   name: {
     type: String,
+    // required: true
   },
   group: {
     type: String,
+    // required: true
   },
   type: {
     type: String,
@@ -46,6 +48,6 @@ const roomSchema = new mongoose.Schema({
   },
   create_at: { type: Date, default: Date.now },
   update_at: { type: Date, default: Date.now },
-});
+}, { versionKey: false });
 
 module.exports = mongoose.model("Room", roomSchema, "rooms");

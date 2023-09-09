@@ -5,16 +5,9 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 
-const userRoute = require("./routes/userRoute.js");
-app.use("/api/", userRoute);
-const roomRoute = require("./routes/roomRoute.js")
-app.use("/api/", roomRoute)
-const serviceRoute = require("./routes/serviceRoute.js")
-app.use("/api/", serviceRoute)
-
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(logger("dev"));
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(logger("dev"));
 
 require("dotenv").config();
 const port = process.env.PORT || 3000;
@@ -41,3 +34,10 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
   console.log(`URL: http://localhost:${port}`);
 });
+
+const userRoute = require("./routes/userRoute.js");
+app.use("/api/", userRoute);
+const roomRoute = require("./routes/roomRoute.js")
+app.use("/api/", roomRoute)
+const serviceRoute = require("./routes/serviceRoute.js")
+app.use("/api/", serviceRoute)

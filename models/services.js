@@ -5,6 +5,6 @@ const serviceSchema = new mongoose.Schema({
   price: Number,
   create_at: { type: Date, default: Date.now },
   update_at: { type: Date, default: Date.now },
-});
+}, { versionKey: false });
 
 module.exports = mongoose.model("Service", serviceSchema, "services");
