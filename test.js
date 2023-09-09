@@ -8,6 +8,8 @@ const logger = require("morgan");
 
 const userRoute = require("./routes/userRoute.js");
 app.use("/api/", userRoute);
+const roomRoute = require("./routes/roomRoute.js")
+app.use("/api/",roomRoute)
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
