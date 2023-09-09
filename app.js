@@ -21,7 +21,7 @@ mongoose
   .catch((error) => console.error("Connection error:", error));
 
 
-  
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
@@ -30,3 +30,6 @@ app.listen(port, () => {
 //setup routes
 const roomRoute = require('./routes/roomRoutes')
 app.use('/api/', roomRoute);
+
+const serviceRoute = require('./routes/serviceRoutes')
+app.use('/api/', serviceRoute);
