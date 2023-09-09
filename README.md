@@ -20,6 +20,8 @@ npm install express body-parser morgan mongoose nodemon
 PORT=1234
 DBSTRING='mongodb+srv://gta5online:heistheistheist@phucdb.q6id4ol.mongodb.net/DB'
 ```
+&nbsp;&nbsp;&nbsp;&nbsp;***Lưu ý:*** ConnectionString (*DBSTRING*) trong file này chỉ có quyền read-only, không thực hiện write được đâu nhé.
+
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;4. Chạy
 
