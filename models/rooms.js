@@ -1,25 +1,51 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 const roomSchema = new mongoose.Schema({
-    name: String,
-    group: String,
+  name: {
     type: String,
-    price: Number,
-    deposit: Number,
-    debt: Number,
-    renter: Number,
-    day_of_hire: Date,
-    expiration_date: Date,
-    status: String,
-    services: [{
-    serviceId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Service',
+  },
+  group: {
+    type: String,
+  },
+  type: {
+    type: String,
+  },
+  price: {
+    type: Number,
+  },
+  deposit: {
+    type: Number,
+  },
+  debt: {
+    type: Number,
+  },
+  renter: {
+    type: Number,
+  },
+  day_of_hire: {
+    type: Date,
+  },
+  expiration_date: {
+    type: Date,
+  },
+  status: {
+    type: String,
+  },
+  services: [
+    {
+      serviceId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Service",
+      },
+      quantity: {
+        type: Number,
+      },
     },
-    quantity: Number,
-    }],
-    sort: Number,
-    created_at: { type: Date, default: Date.now },
-    updated_at: { type: Date, default: Date.now },
-    });
+  ],
+  sort: {
+    type: Number,
+  },
+  create_at: { type: Date, default: Date.now },
+  update_at: { type: Date, default: Date.now },
+});
 
-    module.exports = mongoose.model("Room", roomSchema, 'rooms');
+module.exports = mongoose.model("Room", roomSchema, "rooms");

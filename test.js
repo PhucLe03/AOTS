@@ -1,4 +1,3 @@
-// console.log("Hello")
 const express = require("express");
 const app = express();
 
@@ -9,7 +8,9 @@ const logger = require("morgan");
 const userRoute = require("./routes/userRoute.js");
 app.use("/api/", userRoute);
 const roomRoute = require("./routes/roomRoute.js")
-app.use("/api/",roomRoute)
+app.use("/api/", roomRoute)
+const serviceRoute = require("./routes/serviceRoute.js")
+app.use("/api/", serviceRoute)
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

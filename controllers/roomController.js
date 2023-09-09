@@ -2,6 +2,7 @@ const Room = require("../models/rooms.js");
 
 function getAllRooms(req, res) {
   Room.find()
+    // .select('_id name group type')
     .then((rooms) => {
       res.status(200).json(rooms);
     })
