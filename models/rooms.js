@@ -1,37 +1,17 @@
 const mongoose = require("mongoose");
 const roomSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    // required: true
-  },
-  group: {
-    type: String,
-    // required: true
-  },
+  name: String,
+  group: String,
   type: {
     type: String,
   },
-  price: {
-    type: Number,
-  },
-  deposit: {
-    type: Number,
-  },
-  debt: {
-    type: Number,
-  },
-  renter: {
-    type: Number,
-  },
-  day_of_hire: {
-    type: Date,
-  },
-  expiration_date: {
-    type: Date,
-  },
-  status: {
-    type: String,
-  },
+  price: Number,
+  deposit: Number,
+  debt: Number,
+  renter: Number,
+  day_of_hire: Date,
+  expiration_date: Date,
+  status: String,
   services: [
     {
       serviceId: {
@@ -43,9 +23,7 @@ const roomSchema = new mongoose.Schema({
       },
     },
   ],
-  sort: {
-    type: Number,
-  },
+  sort: Number,
   create_at: { type: Date, default: Date.now },
   update_at: { type: Date, default: Date.now },
 }, { versionKey: false });

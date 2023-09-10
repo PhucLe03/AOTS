@@ -6,8 +6,8 @@ const mongoose = require("mongoose");
 const logger = require("morgan");
 
 app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(logger("dev"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(logger("dev"));
 
 require("dotenv").config();
 const port = process.env.PORT || 3000;
@@ -19,8 +19,10 @@ app.get("/", (req, res) => {
   res.render("sample.ejs");
 });
 
+const connectionString = process.env.DBSTRING || "mongodb://localhost:27017/DatabaseName"
+
 mongoose
-  .connect(process.env.DBSTRING,
+  .connect(connectionString,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => {
@@ -35,8 +37,8 @@ app.listen(port, () => {
   console.log(`URL: http://localhost:${port}`);
 });
 
-const userRoute = require("./routes/userRoute.js");
-app.use("/api/", userRoute);
+const userRoute = require("./routes/userRoute.js")
+app.use("/api/", userRoute)
 const roomRoute = require("./routes/roomRoute.js")
 app.use("/api/", roomRoute)
 const serviceRoute = require("./routes/serviceRoute.js")

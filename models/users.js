@@ -1,18 +1,19 @@
 const mongoose = require("mongoose")
 const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-    },
-    phone: {
-        type: String
-    },
-    idcard: {
-        type: String
-    },
-    status: {
-        type: String
-    },
+    name: String,
+    phone: String,
+    idcard: String,
+    birthday: Date,
+    sex: Boolean,
+    province: String,
+    district: String,
+    commune: String,
+    address: String,
+    room: String,
+    main_contact: Boolean,
+    status: String,
+    create_at: { type: Date, default: Date.now },
+    update_at: { type: Date, default: Date.now },
     
 }, { versionKey: false });
 

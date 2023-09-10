@@ -14,7 +14,7 @@ function getServiceById(req, res) {
   Service.findById(req.params.id)
     .then((service) => {
       if (!service) {
-        return res.status(404).json({ message: "service not found." });
+        return res.status(404).json({ message: "Service not found." });
       }
       res.status(200).json(service);
     })
