@@ -22,3 +22,9 @@ mongoose.connect('mongodb://127.0.0.1:27017', { useNewUrlParser: true, useUnifie
 const roomRoute = require('./routes/roomRoute')
 //localhost:3333/api/routes
 app.use('/api/',roomRoute)
+
+const renterRoute = require('./routes/renterRoute')
+app.use('/api/',renterRoute)
+
+const serviceRoute = require('./routes/serviceRoute')
+app.use('/api/',serviceRoute)
