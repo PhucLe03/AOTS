@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require('body-parser')
+const bodyParser = require("body-parser");
 
 require("dotenv").config();
 
@@ -20,16 +20,16 @@ mongoose
   .then(() => console.log("Connected to database"))
   .catch((error) => console.error("Connection error:", error));
 
-
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-
 //setup routes
-const roomRoute = require('./routes/roomRoutes')
-app.use('/api/', roomRoute);
+const roomRoute = require("./routes/roomRoutes");
+app.use("/api/", roomRoute);
 
-const serviceRoute = require('./routes/serviceRoutes')
-app.use('/api/', serviceRoute);
+const serviceRoute = require("./routes/serviceRoutes");
+app.use("/api/", serviceRoute);
+
+const renterRoute = require("./routes/renterRoutes");
+app.use("/api/", renterRoute);
