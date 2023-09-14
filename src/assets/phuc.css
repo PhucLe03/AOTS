@@ -1,0 +1,118 @@
+html {
+    position: relative;
+    font-size: 14px;
+    min-height: 100%;
+    /* height: 100%; */
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    /* margin-bottom: 60px; */
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    /* min-height: 100%; */
+}
+
+.header {
+    position: fixed;
+    /* fixing the position takes it out of html flow - knows
+                     nothing about where to locate itself except by browser
+                     coordinates */
+    left: 0;
+    /* top left corner should start at leftmost spot */
+    top: 0;
+    /* top left corner should start at topmost spot */
+    width: 100vw;
+    /* take up the full browser width */
+    z-index: 200;
+    /* high z index so other content scrolls underneath */
+    height: 100px;
+    /* define height for content */
+}
+
+.phuc_bold {
+    font-weight: bold;
+}
+
+.phuc_button {
+    background-color: green;
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    border-radius: 0.3rem;
+    border: hidden;
+    cursor: pointer;
+    font-weight: bold;
+    color: gold;
+}
+
+.phuc_button:hover {
+    background-color: darkgreen;
+    color: wheat;
+}
+
+.phuc_center {
+    text-align: center;
+}
+
+.phuc_group {
+    position: relative;
+    display: flex;
+}
+
+.phuc_block {
+    display: block;
+}
+
+.phuc_clear {
+    clear: both;
+    height: 100px;
+    /* min-height: 100%; */
+}
+
+/* .phuc_clear::after {
+
+} */
+
+.phuc_darktheme {
+    background-color: gray;
+}
+
+.phuc_bg {
+    background-color: gold;
+    color: forestgreen;
+    font-weight: bold;
+}
+
+.phuc_nav {
+    border-radius: 10px;
+}
+
+.phuc_nav:hover {
+    background-color: wheat;
+    color: black;
+}
+
+.phuc_nav a {
+    border-radius: 10px;
+    background-color: gold;
+    color: black;
+}
+
+.phuc_nav a:hover {
+    background-color: wheat;
+    color: black;
+}
+
+.phuc_footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+}

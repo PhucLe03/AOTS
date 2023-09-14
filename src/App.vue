@@ -1,0 +1,62 @@
+<template>
+  <html lang="en">
+    <body>
+      <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
+      <!-- <HomeView></HomeView>
+  <HelloWorld msg="Welcome to Your Vue.js App" /> -->
+      <header>
+        <nav
+          class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3 phuc_bg"
+        >
+          <div class="container-fluid">
+            <a class="navbar-brand">Phuc</a>
+            <div
+              class="navbar-collapse collapse d-sm-inline-flex justify-content-between"
+            >
+              <ul class="navbar-nav flex-grow-1">
+                <li class="phuc_nav">
+                  <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="phuc_nav">
+                  <a class="nav-link" href="about">About</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="container-fluid"></div>
+        </nav>
+      </header>
+      <router-view />
+    </body>
+    <div class="phuc_clear"></div>
+    <div class="phuc_footer phuc_bg border-top text-muted">
+        <div class="container phuc_bg">
+          &copy; 2023 - Phuc - <a href="about">About</a>
+        </div>
+      </div>
+  </html>
+</template>
+
+<script>
+
+export default {
+  name: "App",
+  // components: {
+  //   HelloWorld,
+  //   HomeView,
+  // },
+};
+</script>
+
+<style>
+#app {
+  font-family: Helvetica, Arial, sans-serif, Avenir;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 0px;
+}
+</style>
+
+<style scoped></style>
