@@ -1,12 +1,13 @@
 <template>
     <div class="hello">
       <h1>Page Not Found</h1>
+      <h4>Please check your url, there might be some issue about it.</h4>
     </div>
   </template>
   
   <script>
   export default {
-    name: "HomeView",
+    name: "PageNotFound",
   };
   </script>
   

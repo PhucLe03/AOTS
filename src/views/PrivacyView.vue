@@ -1,13 +1,13 @@
 <template>
   <div class="hello">
-    <h1>Home</h1>
-    <h4>This is the home page. Every default view should be here.</h4>
+    <h1>Privacy</h1>
+    <h4>This is the website's privacy page.</h4>
   </div>
 </template>
 
 <script>
 export default {
-  name: "HomeView",
+  name: "PrivacyView",
 };
 </script>
 

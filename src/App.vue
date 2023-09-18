@@ -18,6 +18,9 @@
                   <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="phuc_nav">
+                  <a class="nav-link" href="privacy">Privacy</a>
+                </li>
+                <li class="phuc_nav">
                   <a class="nav-link" href="about">About</a>
                 </li>
               </ul>

@@ -1,13 +1,14 @@
 <template>
     <div class="hello">
-      <h1>About</h1>
-      <h4>This is the About page. This page contains all the information about us.</h4>
+      <h1>User Profile</h1>
+      <h4>This is the user profile page. Every information about a specific user should be here.</h4>
+      <h5 style="color: red;">Hello user {{ $route.params.id }}!!</h5>
     </div>
   </template>
   
   <script>
   export default {
-    name: "AboutView",
+    name: "HomeView",
   };
   </script>
   
