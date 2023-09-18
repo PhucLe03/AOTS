@@ -1,13 +1,23 @@
 <template>
   <div class="hello">
     <h1>Home</h1>
-    <h4>This is the home page. Every default view should be here.</h4>
+
+    <h5>This is the home page. Default view should be here.</h5>
+    <HelloWorld msg="Hello World"></HelloWorld>
+    <HomeImage msg="Home Logo"></HomeImage>
   </div>
 </template>
 
 <script>
+import HelloWorld from "@/components/HelloWorld.vue";
+import HomeImage from "@/components/HomeImage.vue";
+
 export default {
   name: "HomeView",
+  components: {
+    HelloWorld,
+    HomeImage,
+  },
 };
 </script>
 

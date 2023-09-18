@@ -28,12 +28,8 @@ body {
     /* top left corner should start at leftmost spot */
     top: 0;
     /* top left corner should start at topmost spot */
-    width: 100vw;
+    width: 100%;
     /* take up the full browser width */
-    z-index: 200;
-    /* high z index so other content scrolls underneath */
-    height: 100px;
-    /* define height for content */
 }
 
 .phuc_bold {
@@ -111,8 +107,17 @@ body {
 
 .phuc_footer {
     position: fixed;
+    /* position: absolute; */
+    /*use this only when the page is full of content*/
     left: 0;
     bottom: 0;
     width: 100%;
     padding: 1rem;
+}
+
+.phuc_logo {
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    padding: 5px;
 }

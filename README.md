@@ -1,10 +1,15 @@
 ## &nbsp;&nbsp;&nbsp;&nbsp;Các bước cài đặt trước khi có thể test
 
-### &nbsp;&nbsp;&nbsp;&nbsp;1. Cài đặt thư viện
+### &nbsp;&nbsp;&nbsp;&nbsp;1. Cài đặt công cụ và thư viện
 
 &nbsp;&nbsp;&nbsp;&nbsp;- VueJS:
 ```c
 npm install -g @vue/cli
+```
+
+&nbsp;&nbsp;&nbsp;&nbsp;- Axios:
+```c
+npm install axios
 ```
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;2. Chạy
