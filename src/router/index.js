@@ -5,7 +5,7 @@ import AboutView from "@/views/AboutView.vue";
 import PrivacyView from "@/views/PrivacyView.vue";
 import UserProfileView from "@/views/UserProfileView.vue";
 
-import PageNotFound from "../views/PageNotFound.vue";
+import PageNotFound from "@/views/PageNotFound.vue";
 
 const routes = [
   { path: "/", name: "Home", component: HomeView },
