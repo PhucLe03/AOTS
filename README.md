@@ -1,20 +1,8 @@
 ## &nbsp;&nbsp;&nbsp;&nbsp;Các bước cài đặt trước khi có thể test
 
-### &nbsp;&nbsp;&nbsp;&nbsp;1. Cài đặt công cụ và thư viện
+### &nbsp;&nbsp;&nbsp;&nbsp;1. Chạy trên Terminal
 
-&nbsp;&nbsp;&nbsp;&nbsp;- VueJS:
-```c
-npm install -g @vue/cli
-```
-
-&nbsp;&nbsp;&nbsp;&nbsp;- Axios:
-```c
-npm install axios
-```
-
-### &nbsp;&nbsp;&nbsp;&nbsp;2. Chạy
-
-&nbsp;&nbsp;&nbsp;&nbsp;Dùng Terminal  navigate vào folder chính và dùng commandline chạy dòng lệnh:
+&nbsp;&nbsp;&nbsp;&nbsp;Dùng Terminal navigate vào folder chính và dùng commandline chạy dòng lệnh:
 ```c
 npm run serve
 ```
@@ -28,5 +16,6 @@ App running at:
   Note that the development build is not optimized.
   To create a production build, run npm run build.
 ```
+&nbsp;&nbsp;&nbsp;&nbsp;Địa chỉ IP có thể khác nhau trong các lần test khác nhau
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;3. Have fun!
