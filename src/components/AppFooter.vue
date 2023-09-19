@@ -3,7 +3,7 @@
     <div class="phuc_clear"></div>
     <footer class="phuc_footer phuc_bg border-top text-muted">
       <div class="container phuc_bg">
-        &copy; 2023 - Phuc - <a href="about">About</a>
+        &copy; 2023 - 266Motel - <a href="privacy">Privacy</a>
       </div>
     </footer>
   </html>
