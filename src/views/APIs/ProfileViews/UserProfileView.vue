@@ -30,6 +30,7 @@
           </td>
           <td>
             {{ info.room }}
+            <!-- <a :href="'/api/room/' + item.room._id">{{ info.room }}</a> -->
           </td>
         </tr>
       </table>

@@ -1,43 +1,23 @@
 <template>
   <div class="hello">
-    <h1>Rooms list</h1>
+    <h1>Room Services list</h1>
     <!-- <button @click="fetchData">Fetch</button> -->
     <div>
       <table style="width: 100%">
         <tr>
           <th>Name</th>
-          <th>Group</th>
-          <th>Type</th>
+          <th>Unit</th>
           <th>Price</th>
-          <th>Deposit</th>
-          <th>Debt</th>
-          <th>Status</th>
-          <th>Services</th>
         </tr>
         <tr v-for="item in info" :key="item._id">
           <td>
-            <a :href="'/api/room/' + item._id">{{ item.name }}</a>
+            {{ item.name }}
           </td>
           <td>
-            {{ item.group }}
-          </td>
-          <td>
-            {{ item.type }}
+            {{ item.unit }}
           </td>
           <td>
             {{ item.price }}
-          </td>
-          <td>
-            {{ item.deposit }}
-          </td>
-          <td>
-            {{ item.debt }}
-          </td>
-          <td>
-            {{ item.status }}
-          </td>
-          <td>
-            <a :href="'/api/room/' + item._id + '/services'">List</a>
           </td>
         </tr>
       </table>
@@ -49,7 +29,7 @@
 import axios from "axios";
 
 export default {
-  name: "RoomView",
+  name: "RoomServicesView",
   data() {
     return {
       info: null,
@@ -58,7 +38,7 @@ export default {
     };
   },
   created() {
-    const API_URL = "http://localhost:1234/api/rooms";
+    const API_URL = "http://localhost:1234/api/room/" + this.$route.params.id + "/services";
     axios
       .get(API_URL)
       .then((response) => (this.info = response.data))

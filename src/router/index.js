@@ -7,6 +7,7 @@ import UserView from "@/views/APIs/UserView.vue"
 import UserProfileView from "@/views/APIs/ProfileViews/UserProfileView.vue";
 import RoomView from "@/views/APIs/RoomView.vue"
 import RoomInfoView from "@/views/APIs/ProfileViews/RoomInfoView.vue";
+import RoomServicesView from "@/views/APIs/ProfileViews/RoomServicesView.vue"
 import ServiceView from "@/views/APIs/ServiceView.vue";
 import ServiceInfoView from "@/views/APIs/ProfileViews/ServiceInfoView.vue";
 
@@ -20,6 +21,7 @@ const routes = [
   { path: "/api/renter/:id", name: "Renter", component: UserProfileView },
   { path: "/api/rooms", name: "Rooms", component: RoomView },
   { path: "/api/room/:id", name: "Room", component: RoomInfoView },
+  { path: "/api/room/:id/services", name: "RoomServices", component: RoomServicesView },
   { path: "/api/services", name: "Services", component: ServiceView },
   { path: "/api/service/:id", name: "Service", component: ServiceInfoView },
   {
