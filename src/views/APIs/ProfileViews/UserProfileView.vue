@@ -1,35 +1,35 @@
 <template>
   <div class="hello">
-    <h1>Renters list</h1>
-    <!-- <button @click="fetchData">Fetch</button> -->
+    <h1>Renter Profile</h1>
+    <h4>
+      This is the renter profile page. Every information about a specific renter
+      should be here.
+    </h4>
+    <h3 style="color: red">Renter: {{ info.name }}</h3>
     <div>
-      <table style="width: 100%">
+      <table style="width: 100%;">
         <tr>
-          <th>Name</th>
           <th>Birthday</th>
           <th>Province</th>
           <th>District</th>
           <th>Commune</th>
           <th>Room</th>
         </tr>
-        <tr v-for="item in info" :key="item._id">
+        <tr>
           <td>
-            <a :href="'/api/renter/' + item._id">{{ item.name }}</a>
+            {{ info.birthday }}
           </td>
           <td>
-            {{ item.birthday }}
+            {{ info.province }}
           </td>
           <td>
-            {{ item.province }}
+            {{ info.district }}
           </td>
           <td>
-            {{ item.district }}
+            {{ info.commune }}
           </td>
           <td>
-            {{ item.commune }}
-          </td>
-          <td>
-            {{ item.room }}
+            {{ info.room }}
           </td>
         </tr>
       </table>
@@ -38,10 +38,10 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "axios"
 
 export default {
-  name: "UserView",
+  name: "UserProfileView",
   data() {
     return {
       info: null,
@@ -50,16 +50,14 @@ export default {
     };
   },
   created() {
-    const API_URL = "http://localhost:1234/api/users";
+    const API_URL = "http://localhost:1234/api/user/" + this.$route.params.id;
     axios
       .get(API_URL)
-      .then((response) => (this.info = response.data.User))
+      .then((response) => (this.info = response.data))
       .catch((error) => {
         console.error("Error: ", error);
       });
   },
-
-  methods: {},
 };
 </script>
 
@@ -73,7 +71,7 @@ ul {
   padding: 0;
 }
 li {
-  display: block;
+  display: inline-block;
   margin: 0 10px;
 }
 a {
@@ -85,4 +83,9 @@ td {
   align-tracks: center;
   border: 1px solid black;
 }
+
+table {
+  margin: 40px 0 0;
+}
+
 </style>

@@ -36,7 +36,7 @@
         >
           <ul class="navbar-nav flex-grow-1">
             <li class="phuc_nav">
-              <a class="nav-link" href="/api/users">Users</a>
+              <a class="nav-link" href="/api/renters">Renters</a>
             </li>
             <li class="phuc_nav">
               <a class="nav-link" href="/api/rooms">Rooms</a>

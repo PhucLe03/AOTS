@@ -11,7 +11,7 @@
         </tr>
         <tr v-for="item in info" :key="item._id">
           <td>
-            {{ item.name }}
+            <a :href="'/api/service/' + item._id">{{ item.name }}</a>
           </td>
           <td>
             {{ item.unit }}

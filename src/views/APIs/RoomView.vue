@@ -9,10 +9,13 @@
           <th>Group</th>
           <th>Type</th>
           <th>Price</th>
+          <th>Deposit</th>
+          <th>Debt</th>
+          <th>Status</th>
         </tr>
         <tr v-for="item in info" :key="item._id">
           <td>
-            {{ item.name }}
+            <a :href="'/api/room/' + item._id">{{ item.name }}</a>
           </td>
           <td>
             {{ item.group }}
@@ -22,6 +25,15 @@
           </td>
           <td>
             {{ item.price }}
+          </td>
+          <td>
+            {{ item.deposit }}
+          </td>
+          <td>
+            {{ item.debt }}
+          </td>
+          <td>
+            {{ item.status }}
           </td>
         </tr>
       </table>
