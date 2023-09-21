@@ -62,10 +62,27 @@ function deleteRoom(req, res) {
     });
 }
 
+function getServicesInRoom(req, res) {
+  const roomId = req.params.roomId;
+  Room.findById(roomId)
+  .populate('services.serviceId')
+  .then(room => {
+  if (!room) {
+  return res.status(404).json({ message: 'Room not found.' });
+  }
+  const services = room.services.map(serviceData => serviceData.serviceId);
+  res.status(200).json(services);
+  })
+  .catch(error => {
+  res.status(500).json({ message: 'Server error. Please try again.' });
+  });
+  }
+
 module.exports = {
   getAllRooms,
   getRoomById,
   createRoom,
   updateRoom,
   deleteRoom,
+  getServicesInRoom,
 };

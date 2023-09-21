@@ -9,7 +9,13 @@ const userSchema = new mongoose.Schema({
     district: String,
     commune: String,
     address: String,
-    room: String,
+    room: {
+        roomId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Room",
+          },
+        name: String,
+    },
     main_contact: Boolean,
     status: String,
     create_at: { type: Date, default: Date.now },

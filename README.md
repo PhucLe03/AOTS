@@ -9,7 +9,7 @@
 ### &nbsp;&nbsp;&nbsp;&nbsp;2. Cài đặt các thư viện
 
 ```c
-npm install express dotenv body-parser morgan mongoose nodemon
+npm install express dotenv body-parser morgan mongoose nodemon cors
 ```
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;3. Thêm file config

@@ -72,6 +72,11 @@ function deleteUser(req, res) {
     });
 }
 
+function getUserRoom(req, res) {
+  var Room = require('../models/rooms.js');
+  
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
