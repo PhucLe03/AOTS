@@ -12,7 +12,7 @@
           <th>Deposit</th>
           <th>Debt</th>
           <th>Status</th>
-          <th>Services</th>
+          <!-- <th>Services</th> -->
         </tr>
         <tr v-for="item in info" :key="item._id">
           <td>
@@ -36,9 +36,9 @@
           <td>
             {{ item.status }}
           </td>
-          <td>
+          <!-- <td>
             <a :href="'/api/room/' + item._id + '/services'">List</a>
-          </td>
+          </td> -->
         </tr>
       </table>
     </div>
@@ -47,6 +47,7 @@
 
 <script>
 import axios from "axios";
+const API_URL = "http://localhost:1234/api/";
 
 export default {
   name: "RoomView",
@@ -58,9 +59,9 @@ export default {
     };
   },
   created() {
-    const API_URL = "http://localhost:1234/api/rooms";
+    var thisAPI_URL = API_URL + 'rooms';
     axios
-      .get(API_URL)
+      .get(thisAPI_URL)
       .then((response) => (this.info = response.data))
       .catch((error) => {
         console.error("Error: ", error);

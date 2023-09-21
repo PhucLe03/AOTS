@@ -39,6 +39,7 @@
 
 <script>
 import axios from "axios";
+const API_URL = "http://localhost:1234/api/";
 
 export default {
   name: "UserView",
@@ -50,9 +51,9 @@ export default {
     };
   },
   created() {
-    const API_URL = "http://localhost:1234/api/users";
+    var thisAPI_URL = API_URL + 'users';
     axios
-      .get(API_URL)
+      .get(thisAPI_URL)
       .then((response) => (this.info = response.data.User))
       .catch((error) => {
         console.error("Error: ", error);

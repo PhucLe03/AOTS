@@ -1,13 +1,14 @@
 <template>
-  <div class="hello">
+  <div class="hello" :to="{ params: { pageTitle: `{ info.name }` } }">
     <h1>Renter Profile</h1>
+
     <h4>
       This is the renter profile page. Every information about a specific renter
       should be here.
     </h4>
     <h3 style="color: red">Renter: {{ info.name }}</h3>
     <div>
-      <table style="width: 100%;">
+      <table style="width: 100%">
         <tr>
           <th>Birthday</th>
           <th>Province</th>
@@ -39,7 +40,7 @@
 </template>
 
 <script>
-import axios from "axios"
+import axios from "axios";
 
 export default {
   name: "UserProfileView",
@@ -50,11 +51,18 @@ export default {
       response: {},
     };
   },
+  meta: {
+    title: "Hello",
+  },
   created() {
     const API_URL = "http://localhost:1234/api/user/" + this.$route.params.id;
     axios
       .get(API_URL)
-      .then((response) => (this.info = response.data))
+      .then((response) => {
+        this.info = response.data;
+        const theTitle = document.querySelector("head title");
+        theTitle.textContent = 'Renter ' + response.data.name;
+      })
       .catch((error) => {
         console.error("Error: ", error);
       });
@@ -88,5 +96,4 @@ td {
 table {
   margin: 40px 0 0;
 }
-
 </style>

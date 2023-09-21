@@ -27,6 +27,7 @@
 
 <script>
 import axios from "axios";
+const API_URL = "http://localhost:1234/api/";
 
 export default {
   name: "ServiceView",
@@ -38,9 +39,9 @@ export default {
     };
   },
   created() {
-    const API_URL = "http://localhost:1234/api/services";
+    var thisAPI_URL = API_URL + 'services';
     axios
-      .get(API_URL)
+      .get(thisAPI_URL)
       .then((response) => (this.info = response.data))
       .catch((error) => {
         console.error("Error: ", error);
