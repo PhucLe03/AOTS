@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import controller from '@/utils/controller';
 
 export default {
   name: "UserProfileView",
@@ -37,19 +37,9 @@ export default {
       response: {},
     };
   },
-  created() {
-    const API_URL =
-      "http://localhost:1234/api/service/" + this.$route.params.id;
-    axios
-      .get(API_URL)
-      .then((response) => {
-        this.info = response.data;
-        const theTitle = document.querySelector("head title");
-        theTitle.textContent = "Service " + response.data.name;
-      })
-      .catch((error) => {
-        console.error("Error: ", error);
-      });
+  async created() {
+    this.info = await controller.getServiceByID(this.$route.params.id);
+    controller.setTitle("Service " + this.info.name);
   },
 };
 </script>

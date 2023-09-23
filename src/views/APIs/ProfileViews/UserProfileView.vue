@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import controller from '@/utils/controller';
 
 export default {
   name: "UserProfileView",
@@ -54,18 +54,9 @@ export default {
   meta: {
     title: "Hello",
   },
-  created() {
-    const API_URL = "http://localhost:1234/api/user/" + this.$route.params.id;
-    axios
-      .get(API_URL)
-      .then((response) => {
-        this.info = response.data;
-        const theTitle = document.querySelector("head title");
-        theTitle.textContent = 'Renter ' + response.data.name;
-      })
-      .catch((error) => {
-        console.error("Error: ", error);
-      });
+  async created() {
+    this.info = await controller.getUserByID(this.$route.params.id);
+    controller.setTitle("Renter "+this.info.name);
   },
 };
 </script>

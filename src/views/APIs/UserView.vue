@@ -38,8 +38,7 @@
 </template>
 
 <script>
-import axios from "axios";
-const API_URL = "http://localhost:1234/api/";
+import controller from '@/utils/controller';
 
 export default {
   name: "UserView",
@@ -50,14 +49,8 @@ export default {
       response: {},
     };
   },
-  created() {
-    var thisAPI_URL = API_URL + 'users';
-    axios
-      .get(thisAPI_URL)
-      .then((response) => (this.info = response.data.User))
-      .catch((error) => {
-        console.error("Error: ", error);
-      });
+  async created() {
+    this.info = await controller.getUsers();
   },
 
   methods: {},

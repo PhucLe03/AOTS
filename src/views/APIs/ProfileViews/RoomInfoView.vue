@@ -27,7 +27,7 @@
       </table>
       <h3>Services List</h3>
       <!-- <h4>{{ serinfo }}</h4> -->
-      <table style="width: 100%">
+      <table v-if="nullser==false" style="width: 100%">
         <tr>
           <th>Service's name</th>
           <th>Unit</th>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import controller from '@/utils/controller';
 
 export default {
   name: "UserProfileView",
@@ -57,27 +57,15 @@ export default {
       error: String,
       response: {},
       response1: {},
+      nullser: Boolean,
     };
   },
-  created() {
-    const API_URL = "http://localhost:1234/api/room/" + this.$route.params.id;
-    axios
-      .get(API_URL)
-      .then((response) => {
-        this.info = response.data;
-        const theTitle = document.querySelector("head title");
-        theTitle.textContent = "Room " + response.data.name;
-      })
-      .catch((error) => {
-        console.error("Error: ", error);
-      });
-    const servicesAPI_URL = API_URL + "/services";
-    axios
-      .get(servicesAPI_URL)
-      .then((response1) => (this.serinfo = response1.data))
-      .catch((error) => {
-        console.error("Error: ", error);
-      });
+  async created() {
+    this.info = await controller.getRoomByID(this.$route.params.id);
+    controller.setTitle("Room " + this.info.name);
+    this.serinfo = await controller.getRoomServices(this.$route.params.id);
+    if (this.serinfo===null) this.nullser = true;
+    else this.nullser = false;
   },
 };
 </script>
