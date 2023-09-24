@@ -2,8 +2,17 @@
   <div class="hello">
     <h1>Services list</h1>
     <!-- <button @click="fetchData">Fetch</button> -->
+    <AddService @close="toggleModal" :modalActive="modalActive">
+      <div class="modal-content"></div>
+    </AddService>
+    <button class="phuc_button" @click="toggleModal" type="button">
+      Add Service
+    </button>
+    <ServiceRemove @close="toggleRemove" :modalActive="removeActive">
+      <h1>Remove this service?</h1>
+    </ServiceRemove>
     <div>
-      <table style="width: 100%">
+      <table>
         <tr>
           <th>Name</th>
           <th>Unit</th>
@@ -19,6 +28,17 @@
           <td>
             {{ item.price }}
           </td>
+          <td>
+            <button @click="toggleRemove" class="phuc_delete_button">
+              <span class="material-symbols-outlined"> edit </span>
+            </button>
+
+            <button style="visibility: hidden"></button>
+            <button @click="toggleRemove" class="phuc_delete_button">
+              <!-- <i class="fa fa-trash"></i> -->
+              <span class="material-symbols-outlined"> delete_forever </span>
+            </button>
+          </td>
         </tr>
       </table>
     </div>
@@ -26,7 +46,10 @@
 </template>
 
 <script>
-import controller from '@/utils/controller';
+import controller from "@/utils/controller";
+import AddService from "@/components/APIs/Add/AddService.vue";
+import ServiceRemove from "@/components/APIs/Alert/ServiceRemove";
+import { ref } from "vue";
 
 export default {
   name: "ServiceView",
@@ -37,11 +60,26 @@ export default {
       response: {},
     };
   },
+  setup() {
+    const modalActive = ref(false);
+    const removeActive = ref(false);
+    const toggleModal = () => {
+      modalActive.value = !modalActive.value;
+    };
+    const toggleRemove = () => {
+      removeActive.value = !removeActive.value;
+    };
+    return { modalActive, toggleModal, removeActive, toggleRemove };
+  },
   async created() {
     this.info = await controller.getServices();
   },
 
   methods: {},
+  components: {
+    AddService,
+    ServiceRemove,
+  },
 };
 </script>
 
@@ -57,11 +95,5 @@ ul {
 li {
   display: block;
   margin: 0 10px;
-}
-table,
-th,
-td {
-  align-tracks: center;
-  border: 1px solid black;
 }
 </style>

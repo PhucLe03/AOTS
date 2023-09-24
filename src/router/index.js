@@ -11,6 +11,7 @@ import RoomServicesView from "@/views/APIs/ProfileViews/RoomServicesView.vue";
 import ServiceView from "@/views/APIs/ServiceView.vue";
 import ServiceInfoView from "@/views/APIs/ProfileViews/ServiceInfoView.vue";
 
+import TempView from "@/views/TempView.vue"
 import PageNotFound from "@/views/PageNotFound.vue";
 
 const routes = [
@@ -75,6 +76,7 @@ const routes = [
     name: "PageNotFound",
     component: PageNotFound,
   },
+  { path: "/temp", name: "Temp", component: TempView },
 ];
 
 const router = createRouter({

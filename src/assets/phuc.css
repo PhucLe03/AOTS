@@ -54,6 +54,20 @@ body {
     color: wheat;
 }
 
+.phuc_delete_button {
+    background-color: red;
+    /* font-size: 1.25rem; */
+    border-radius: 0.3rem;
+    border: hidden;
+    cursor: pointer;
+    color: gold;
+}
+
+.phuc_delete_button:hover {
+    background-color: lightsalmon;
+    color: wheat;
+}
+
 .phuc_center {
     text-align: center;
 }
@@ -76,6 +90,14 @@ body {
 /* .phuc_clear::after {
 
 } */
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
 
 .phuc_darktheme {
     background-color: gray;
@@ -123,3 +145,19 @@ body {
     height: 45px;
     padding: 5px;
 }
+
+table {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th {
+    background-color: lightgreen;
+}
+/* table,
+th,
+td {
+  align-tracks: center;
+  border: 1px solid black;
+} */

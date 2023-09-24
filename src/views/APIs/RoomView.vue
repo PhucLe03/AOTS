@@ -3,7 +3,7 @@
     <h1>Rooms list</h1>
     <!-- <button @click="fetchData">Fetch</button> -->
     <div>
-      <table style="width: 100%">
+      <table>
         <tr>
           <th>Name</th>
           <th>Group</th>
@@ -77,11 +77,5 @@ ul {
 li {
   display: block;
   margin: 0 10px;
-}
-table,
-th,
-td {
-  align-tracks: center;
-  border: 1px solid black;
 }
 </style>

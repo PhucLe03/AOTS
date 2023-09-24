@@ -3,7 +3,7 @@
     <h1>Renters list</h1>
     <!-- <button @click="fetchData">Fetch</button> -->
     <div>
-      <table style="width: 100%">
+      <table class="responsive-table">
         <tr>
           <th>Name</th>
           <th>Birthday</th>
@@ -72,11 +72,5 @@ li {
 }
 a {
   color: red;
-}
-table,
-th,
-td {
-  align-tracks: center;
-  border: 1px solid black;
 }
 </style>

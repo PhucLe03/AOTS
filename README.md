@@ -2,7 +2,15 @@
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;1. Cài đặt NodeJS
 
-### &nbsp;&nbsp;&nbsp;&nbsp;2. Chạy trên Terminal
+### &nbsp;&nbsp;&nbsp;&nbsp;2. Thiết lập môi trường
+
+&nbsp;&nbsp;&nbsp;&nbsp;Tạo file `.env` với nội dung:
+```c
+VUE_APP_PORT=1234
+```
+&nbsp;&nbsp;&nbsp;&nbsp;Port 1234 là port của backend chạy song song với Vue.
+
+### &nbsp;&nbsp;&nbsp;&nbsp;3. Chạy trên Terminal
 
 &nbsp;&nbsp;&nbsp;&nbsp;Dùng Terminal navigate vào folder chính (folder `AOTS`) và dùng commandline chạy các dòng lệnh:
 ```c
@@ -23,4 +31,4 @@ App running at:
 ```
 &nbsp;&nbsp;&nbsp;&nbsp;Địa chỉ IP có thể khác nhau trong các lần test khác nhau
 
-### &nbsp;&nbsp;&nbsp;&nbsp;3. Have fun!
+### &nbsp;&nbsp;&nbsp;&nbsp;4. Have fun!
