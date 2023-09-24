@@ -27,26 +27,37 @@
       </table>
       <h3>Services List</h3>
       <!-- <h4>{{ serinfo }}</h4> -->
-      <table v-if="nullser==false" style="width: 100%">
-        <tr>
-          <th>Service's name</th>
-          <th>Unit</th>
-          <th>Price</th>
-          <th>Quantity</th>
-        </tr>
-        <tr v-for="(item, idx) in serinfo" :key="idx">
-          <td>{{ item.name }}</td>
-          <td>{{ item.unit }}</td>
-          <td>{{ item.price }}</td>
-          <td>{{ info.services[idx].quantity }}</td>
-        </tr>
-      </table>
+      <div v-if="nullservice">
+        <h3>No service found.</h3>
+      </div>
+      <div v-else>
+        <table style="width: 100%">
+          <tr>
+            <th>Service's name</th>
+            <th>Unit</th>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+          <tr v-for="(item, idx) in serinfo" :key="idx">
+            <td>{{ item.name }}</td>
+            <td>{{ item.unit }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ info.services[idx].quantity }}</td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import controller from '@/utils/controller';
+import controller from "@/utils/controller";
+
+// const nullhandler = {
+//   name : 0,
+//   unit : 0,
+//   price : 0,
+// }
 
 export default {
   name: "UserProfileView",
@@ -57,15 +68,20 @@ export default {
       error: String,
       response: {},
       response1: {},
-      nullser: Boolean,
+      nullservice: Boolean,
     };
   },
   async created() {
-    this.info = await controller.getRoomByID(this.$route.params.id);
+    this.nullservice = true;
+    // this.serinfo = nullhandler;
+    var roomid = this.$route.params.id;
+    this.info = await controller.getRoomByID(roomid);
     controller.setTitle("Room " + this.info.name);
-    this.serinfo = await controller.getRoomServices(this.$route.params.id);
-    if (this.serinfo===null) this.nullser = true;
-    else this.nullser = false;
+    this.serinfo = await controller.getRoomServices(roomid);
+    if (this.serinfo !== null) {
+      // this.serinfo = nullhandler;
+      this.nullservice = false;
+    }
   },
 };
 </script>

@@ -2,7 +2,10 @@
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;1. Chạy trên Terminal
 
-&nbsp;&nbsp;&nbsp;&nbsp;Dùng Terminal navigate vào folder chính và dùng commandline chạy dòng lệnh:
+&nbsp;&nbsp;&nbsp;&nbsp;Dùng Terminal navigate vào folder chính và dùng commandline chạy các dòng lệnh:
+```c
+npm install
+```
 ```c
 npm run serve
 ```

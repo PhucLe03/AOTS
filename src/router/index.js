@@ -99,7 +99,7 @@ router.beforeEach((to, from, next) => {
   if (titleFromParams) {
     document.title = `${titleFromParams} - ${document.title}`;
   } else {
-    document.title = to.meta?.title ?? "Default Title";
+    document.title = to.meta?.title ?? "266Motel";
   }
 
   const nearestWithTitle = to.matched
