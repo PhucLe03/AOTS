@@ -1,8 +1,10 @@
 ## &nbsp;&nbsp;&nbsp;&nbsp;Các bước cài đặt trước khi có thể test
 
-### &nbsp;&nbsp;&nbsp;&nbsp;1. Chạy trên Terminal
+### &nbsp;&nbsp;&nbsp;&nbsp;1. Cài đặt NodeJS
 
-&nbsp;&nbsp;&nbsp;&nbsp;Dùng Terminal navigate vào folder chính và dùng commandline chạy các dòng lệnh:
+### &nbsp;&nbsp;&nbsp;&nbsp;2. Chạy trên Terminal
+
+&nbsp;&nbsp;&nbsp;&nbsp;Dùng Terminal navigate vào folder chính (folder `AOTS`) và dùng commandline chạy các dòng lệnh:
 ```c
 npm install
 ```

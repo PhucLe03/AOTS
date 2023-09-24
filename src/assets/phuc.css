@@ -45,6 +45,8 @@ body {
     cursor: pointer;
     font-weight: bold;
     color: gold;
+    margin-bottom: 1%;
+    margin-top: 1%;
 }
 
 .phuc_button:hover {
