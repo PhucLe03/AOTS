@@ -54,7 +54,11 @@ async function getServices() {
 }
 
 async function createService(data) {
-  api.post('/service', data);
+  await api.post('/service', data);
+}
+
+async function updateService(id,data) {
+  await api.put('/service/'+id,data);
 }
 
 async function getServiceByID(id) {
@@ -79,6 +83,7 @@ export default {
   getServices,
   createService,
   getServiceByID,
+  updateService,
   deleteService,
 
   // data() {

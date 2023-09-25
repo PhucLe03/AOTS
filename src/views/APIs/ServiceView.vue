@@ -1,10 +1,6 @@
 <template>
   <div class="hello">
     <h1>Services list</h1>
-    <!-- <button @click="fetchData">Fetch</button> -->
-    <!-- <AddService @close="toggleAdd" :modalActive="modalActive">
-      <div class="modal-content"></div>
-    </AddService> -->
     <RegisterModal
       @close="toggleAdd"
       :modalTitle="addTitle"
@@ -35,6 +31,39 @@
         style="width: 30%; background-color: green"
       >
         Add
+      </button>
+    </RegisterModal>
+    
+    <RegisterModal
+      @close="toggleEdit"
+      :modalTitle="editTitle"
+      :modalActive="editActive"
+    >
+      <div style="" v-if="editActive">
+        <div class="form-floating mb-3">
+          <input class="form-control" placeholder="Name" v-model="this.chosenService.name"/>
+          <label class="form-label">Name</label>
+          <span class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+          <input class="form-control" placeholder="Unit" v-model="this.chosenService.unit"/>
+          <label class="form-label">Unit</label>
+          <span class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+          <input class="form-control" placeholder="Price" v-model="this.chosenService.price"/>
+          <label class="form-label">Price</label>
+          <span class="text-danger"></span>
+        </div>
+      </div>
+      <hr/>
+      <button
+        class="phuc_button"
+        @click="Edit(this.chosenService)"
+        type="button"
+        style="width: 30%; background-color: green"
+      >
+        Update
       </button>
     </RegisterModal>
     <ServiceRemove @close="toggleRemove" :modalActive="removeActive">
@@ -82,6 +111,7 @@
           </td>
           <td>
             <button
+            @click="toggleEdit(item)"
               class="phuc_button phuc_edit_button phuc_button_icon"
             >
               <span class="material-symbols-outlined"> edit </span>
@@ -126,6 +156,7 @@ export default {
 
   setup() {
     const addTitle = ref("Add a service");
+    const editTitle = ref("Edit service")
 
     const addActive = ref(false);
     const toggleAdd = () => {
@@ -133,25 +164,30 @@ export default {
     };
     const removeActive = ref(false);
     const chosenService = ref("");
-    // const toggleRemove = (id) => {
-    // };
-
     function toggleRemove(item) {
       chosenService.value = item;
-
       removeActive.value = !removeActive.value;
+    }
+
+    const editActive = ref(false);
+    function toggleEdit(item) {
+      chosenService.value = item;
+      editActive.value = !editActive.value;
     }
 
     return {
       addTitle,
+      editTitle,
 
       addActive,
       toggleAdd,
 
       removeActive,
+      chosenService,
       toggleRemove,
 
-      chosenService,
+      editActive,
+      toggleEdit,
     };
   },
   async created() {
@@ -164,6 +200,10 @@ export default {
   methods: {
     async Create() {
       await controller.createService(this.serviceData);
+      window.location.reload();
+    },
+    async Edit(item) {
+      await controller.updateService(item._id,this.chosenService);
       window.location.reload();
     },
     async Delete(item) {
