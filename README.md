@@ -12,7 +12,7 @@ VUE_APP_PORT=1234
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;3. Chạy trên Terminal
 
-&nbsp;&nbsp;&nbsp;&nbsp;Dùng Terminal navigate vào folder chính (folder `AOTS`) và dùng commandline chạy các dòng lệnh:
+&nbsp;&nbsp;&nbsp;&nbsp;Dùng Terminal navigate vào folder chính (folder chứa file `.gitignore`) và dùng commandline chạy các dòng lệnh:
 ```c
 npm install
 ```

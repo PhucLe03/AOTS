@@ -47,6 +47,7 @@ body {
     color: gold;
     margin-bottom: 1%;
     margin-top: 1%;
+    display: inline-flex;
 }
 
 .phuc_button:hover {
@@ -55,19 +56,23 @@ body {
 }
 
 .phuc_delete_button {
+    
     background-color: red;
-    /* font-size: 1.25rem; */
-    border-radius: 0.3rem;
-    border: hidden;
-    cursor: pointer;
-    color: gold;
+    padding: 2px 5px;
 }
 
 .phuc_delete_button:hover {
     background-color: lightsalmon;
-    color: wheat;
 }
 
+.phuc_edit_button {
+    background-color: darkcyan;
+    padding: 2px 5px;
+}
+
+.phuc_edit_button:hover {
+    background-color: lightgreen;
+}
 .phuc_center {
     text-align: center;
 }

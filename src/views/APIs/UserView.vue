@@ -17,7 +17,7 @@
             <a :href="'/api/renter/' + item._id">{{ item.name }}</a>
           </td>
           <td>
-            {{ item.birthday }}
+            {{ item.birthday_format }}
           </td>
           <td>
             {{ item.province }}

@@ -18,7 +18,7 @@
         </tr>
         <tr>
           <td>
-            {{ info.birthday }}
+            {{ info.birthday_format }}
           </td>
           <td>
             {{ info.province }}
