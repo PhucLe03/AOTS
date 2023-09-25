@@ -7,7 +7,7 @@
             <!-- Modal Content -->
             <h4>Add a service</h4>
             <hr />
-            <div>
+            <div style="">
                 <div class="form-floating mb-3">
                     <input class="form-control" placeholder="Name" />
                     <label class="form-label">Name</label>
@@ -24,10 +24,10 @@
                     <span class="text-danger"></span>
                 </div>
             </div>
-            <div class="col">
-                <button class="phuc_button" @click="close" type="button" style="width: 20%;">Cancel</button>
+            <div class="phuc_align">
+                <button class="phuc_button" @click="close" type="button" style="width: 30%; text-align: center;">Cancel</button>
                 <button style="width: 10%; visibility: hidden;"></button>
-                <button class="phuc_button" @click="close" type="button" style="width: 20%; background-color: green;">Add</button>
+                <button class="phuc_button" @click="close" type="button" style="width: 30%; background-color: green;">Add</button>
             </div>
           </div>
         </transition>

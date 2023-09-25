@@ -11,7 +11,7 @@
               class="phuc_button"
               @click="close"
               type="button"
-              style="width: 20%; background-color: green"
+              style="width: 20%; background-color: green;"
             >
               Cancel
             </button>
@@ -20,7 +20,7 @@
               class="phuc_button"
               @click="remove"
               type="button"
-              style="width: 20%"
+              style="width: 20%;"
             >
               Remove
             </button>
@@ -35,7 +35,7 @@
 // import controller from "@/utils/controller";
 
 export default {
-  props: ["modalActive",],
+  props: ["modalActive"],
   setup(props, { emit }) {
     const close = () => {
       emit("close");
@@ -45,7 +45,7 @@ export default {
     //   await controller.deleteService(removeID);
     // }
 
-    return { close, };
+    return { close };
   },
 };
 </script>

@@ -5,9 +5,6 @@
     <AddService @close="toggleModal" :modalActive="modalActive">
       <div class="modal-content"></div>
     </AddService>
-    <button class="phuc_button" @click="toggleModal" type="button">
-      Add Service
-    </button>
     <ServiceRemove
       @close="toggleRemove"
       :modalActive="removeActive"
@@ -20,6 +17,11 @@
           <th>Name</th>
           <th>Unit</th>
           <th>Price</th>
+          <th>
+            <button class="phuc_button phuc_add_button" @click="toggleModal" type="button">
+              Add Service
+            </button>
+          </th>
         </tr>
         <tr v-for="item in info" :key="item._id">
           <td>
@@ -32,11 +34,11 @@
             {{ item.price }}
           </td>
           <td>
-            <button @click="toggleRemove" class="phuc_button phuc_edit_button">
+            <button @click="toggleRemove" class="phuc_button phuc_edit_button phuc_button_icon">
               <span class="material-symbols-outlined"> edit </span>
             </button>
             <button style="visibility: hidden"></button>
-            <button @click="toggleRemove" class="phuc_button phuc_delete_button">
+            <button @click="toggleRemove" class="phuc_button phuc_delete_button phuc_button_icon">
               <!-- <i class="fa fa-trash"></i> -->
               <span class="material-symbols-outlined"> delete_forever </span>
             </button>

@@ -36,6 +36,11 @@ body {
     font-weight: bold;
 }
 
+.phuc_align {
+    text-align: center;
+    align-items: center;
+}
+
 .phuc_button {
     background-color: green;
     padding: 0.5rem 1rem;
@@ -47,6 +52,11 @@ body {
     color: gold;
     margin-bottom: 1%;
     margin-top: 1%;
+    display: inline-block;
+    text-align: center;
+}
+
+.phuc_button_icon {
     display: inline-flex;
 }
 
@@ -56,7 +66,7 @@ body {
 }
 
 .phuc_delete_button {
-    
+
     background-color: red;
     padding: 2px 5px;
 }
@@ -73,6 +83,22 @@ body {
 .phuc_edit_button:hover {
     background-color: lightgreen;
 }
+
+.phuc_add_button {
+
+    background-color: blue;
+    padding: 2px 5px;
+}
+
+.phuc_add_button:hover {
+    background-color: blueviolet;
+}
+
+.phuc_round {
+    border-radius: 0.3rem;
+}
+
+
 .phuc_center {
     text-align: center;
 }
@@ -97,11 +123,11 @@ body {
 } */
 
 .material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
 }
 
 .phuc_darktheme {
@@ -151,18 +177,22 @@ body {
     padding: 5px;
 }
 
+table tr {
+    border: 1px solid rgb(0, 0, 0);
+    border-top: 1px solid rgb(0, 0, 0);
+}
+
+table td {
+    padding: 2px;
+}
+
 table {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
+
 }
 
 th {
     background-color: lightgreen;
 }
-/* table,
-th,
-td {
-  align-tracks: center;
-  border: 1px solid black;
-} */
