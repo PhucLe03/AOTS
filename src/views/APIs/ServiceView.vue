@@ -2,14 +2,57 @@
   <div class="hello">
     <h1>Services list</h1>
     <!-- <button @click="fetchData">Fetch</button> -->
-    <AddService @close="toggleModal" :modalActive="modalActive">
+    <!-- <AddService @close="toggleAdd" :modalActive="modalActive">
       <div class="modal-content"></div>
-    </AddService>
-    <ServiceRemove
-      @close="toggleRemove"
-      :modalActive="removeActive"
+    </AddService> -->
+    <RegisterModal
+      @close="toggleAdd"
+      :modalTitle="addTitle"
+      :modalActive="addActive"
     >
-      <h1>Remove this service?</h1>
+      <div style="">
+        <div class="form-floating mb-3">
+          <input class="form-control" placeholder="Name" />
+          <label class="form-label">Name</label>
+          <span class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+          <input class="form-control" placeholder="Unit" />
+          <label class="form-label">Unit</label>
+          <span class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+          <input class="form-control" placeholder="Price" />
+          <label class="form-label">Price</label>
+          <span class="text-danger"></span>
+        </div>
+      </div>
+      <hr/>
+      <button
+        class="phuc_button"
+        @click="Create"
+        type="button"
+        style="width: 30%; background-color: green"
+      >
+        Add
+      </button>
+    </RegisterModal>
+    <ServiceRemove @close="toggleRemove" :modalActive="removeActive">
+      <h1>Warning!</h1>
+      <hr />
+      <div v-if="chosenService">
+        Are you sure to remove {{ chosenService.name }}?
+      </div>
+      <div v-else>Removing...</div>
+      <hr />
+      <button
+        class="phuc_button"
+        @click="Delete(chosenService)"
+        type="button"
+        style="width: 20%"
+      >
+        Remove
+      </button>
     </ServiceRemove>
     <div>
       <table>
@@ -18,7 +61,11 @@
           <th>Unit</th>
           <th>Price</th>
           <th>
-            <button class="phuc_button phuc_add_button" @click="toggleModal" type="button">
+            <button
+              class="phuc_button phuc_add_button"
+              @click="toggleAdd"
+              type="button"
+            >
               Add Service
             </button>
           </th>
@@ -34,11 +81,16 @@
             {{ item.price }}
           </td>
           <td>
-            <button @click="toggleRemove" class="phuc_button phuc_edit_button phuc_button_icon">
+            <button
+              class="phuc_button phuc_edit_button phuc_button_icon"
+            >
               <span class="material-symbols-outlined"> edit </span>
             </button>
             <button style="visibility: hidden"></button>
-            <button @click="toggleRemove" class="phuc_button phuc_delete_button phuc_button_icon">
+            <button
+              @click="toggleRemove(item)"
+              class="phuc_button phuc_delete_button phuc_button_icon"
+            >
               <!-- <i class="fa fa-trash"></i> -->
               <span class="material-symbols-outlined"> delete_forever </span>
             </button>
@@ -53,6 +105,7 @@
 import controller from "@/utils/controller";
 import AddService from "@/components/APIs/Add/AddService.vue";
 import ServiceRemove from "@/components/APIs/Alert/ServiceRemove";
+import RegisterModal from "@/components/APIs/RegisterModal.vue";
 import { ref } from "vue";
 
 // import { api } from "@/utils/axios";
@@ -63,26 +116,38 @@ export default {
       info: null,
       error: String,
       response: {},
+      serviceData: {},
     };
   },
 
   setup() {
-    const modalActive = ref(false);
-    const toggleModal = () => {
-      modalActive.value = !modalActive.value;
+    const addTitle = ref("Add a service");
+
+    const addActive = ref(false);
+    const toggleAdd = () => {
+      addActive.value = !addActive.value;
     };
-    
     const removeActive = ref(false);
-    const toggleRemove = () => {
+    const chosenService = ref("");
+    // const toggleRemove = (id) => {
+    // };
+
+    function toggleRemove(item) {
+      chosenService.value = item;
+
       removeActive.value = !removeActive.value;
-    };
+    }
 
     return {
-      modalActive,
-      toggleModal,
+      addTitle,
+
+      addActive,
+      toggleAdd,
 
       removeActive,
       toggleRemove,
+
+      chosenService,
     };
   },
   async created() {
@@ -90,20 +155,21 @@ export default {
   },
 
   methods: {
-    // async Delete(id) {
-    //   console.log(id);
-    //   await controller.deleteService(_id);
-    //   this.remove_ID = id;
-    //   console.log(this.remove_ID)
-    //   this.toggleRemove(this.remove_ID);
-    //   console.log(id);
-    //   await controller.deleteService(id);
-    //   controller.getServices();
-    // },
+    async Create() {
+      console.log('Created a service!!');
+    },
+    async Delete(item) {
+      console.log("remove", item._id);
+      await controller.deleteService(item._id);
+      this.toggleRemove("");
+      window.location.reload();
+      // await controller.getServices();
+    },
   },
   components: {
     AddService,
     ServiceRemove,
+    RegisterModal,
   },
 };
 </script>

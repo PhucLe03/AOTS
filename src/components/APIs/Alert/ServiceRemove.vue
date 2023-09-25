@@ -6,7 +6,7 @@
           <i @click="close" class="far fa-times-circle"></i>
           <!-- Modal Content -->
           <slot />
-          <div class="col">
+          <!-- <div class="col">
             <button
               class="phuc_button"
               @click="close"
@@ -24,7 +24,7 @@
             >
               Remove
             </button>
-          </div>
+          </div> -->
         </div>
       </transition>
     </div>

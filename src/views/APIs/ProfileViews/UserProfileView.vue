@@ -11,6 +11,7 @@
       <table style="width: 100%">
         <tr>
           <th>Birthday</th>
+          <th>Gender</th>
           <th>Province</th>
           <th>District</th>
           <th>Commune</th>
@@ -19,6 +20,9 @@
         <tr>
           <td>
             {{ info.birthday_format }}
+          </td>
+          <td>
+            {{ info.sex_f }}
           </td>
           <td>
             {{ info.province }}

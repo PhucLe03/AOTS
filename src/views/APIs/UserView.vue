@@ -7,6 +7,7 @@
         <tr>
           <th>Name</th>
           <th>Birthday</th>
+          <th>Gender</th>
           <th>Province</th>
           <th>District</th>
           <th>Commune</th>
@@ -18,6 +19,9 @@
           </td>
           <td>
             {{ item.birthday_format }}
+          </td>
+          <td>
+            {{ item.sex_f }}
           </td>
           <td>
             {{ item.province }}

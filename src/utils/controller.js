@@ -6,16 +6,31 @@ function setTitle(title) {
   theTitle.textContent = title;
 }
 
-function formatDate(data, formatString) {
-  data.map((item) => {
-    item.birthday_format = moment(item.birthday).format(formatString);
-  });
-  return data;
+// function formater(data, dateFormatString = "DD/MM/YYYY") {
+//   data.map((item) => {
+//     item.birthday_format = moment(item.birthday).format(dateFormatString);
+//     item.sex_f = item.sex ? "Male" : "Female";
+//   });
+//   return data;
+// }
+
+function realFormater(item, dateFormatString = "DD/MM/YYYY", sexString = ["Male", "Female"]) {
+  item.birthday_format = moment(item.birthday).format(dateFormatString);
+  item.sex_f = item.sex ? sexString[0] : sexString[1];
 }
 
 async function getUsers() {
-  const users = api.get("/users");
-  return formatDate((await users).data.User, "DD/MM/YYYY");
+  const data = api.get("/users");
+  const users = (await data).data;
+  users.map((user) => realFormater(user));
+  return users;
+}
+
+async function getUserByID(id) {
+  const user = api.get("/user/" + id);
+  const temp = (await user).data;
+  realFormater(temp);
+  return temp;
 }
 
 async function getRooms() {
@@ -23,26 +38,9 @@ async function getRooms() {
   return (await rooms).data;
 }
 
-async function getServices() {
-  const services = api.get("/services");
-  return (await services).data;
-}
-
-async function getUserByID(id) {
-  const user = api.get("/user/" + id);
-  const temp = (await user).data
-  temp.birthday_format = moment(temp.birthday).format("DD/MM/YYYY");
-  return temp;
-}
-
 async function getRoomByID(id) {
   const room = api.get("/room/" + id);
   return (await room).data;
-}
-
-async function getServiceByID(id) {
-  const service = api.get("/service/" + id);
-  return (await service).data;
 }
 
 async function getRoomServices(id) {
@@ -50,8 +48,21 @@ async function getRoomServices(id) {
   return (await service).data;
 }
 
+async function getServices() {
+  const services = api.get("/services");
+  return (await services).data;
+}
+
+async function createService(data) {
+  api.post('/service', data);
+}
+
+async function getServiceByID(id) {
+  const service = api.get("/service/" + id);
+  return (await service).data;
+}
+
 async function deleteService(id) {
-  // api.delete('/service/' + id);
   api.delete(`service/${id}`);
 }
 
@@ -59,16 +70,17 @@ export default {
   setTitle,
 
   getUsers,
-  getRooms,
-  getServices,
-
   getUserByID,
+  
+  getRooms,
   getRoomByID,
-  getServiceByID,
-
   getRoomServices,
-
+  
+  getServices,
+  createService,
+  getServiceByID,
   deleteService,
+
   // data() {
   //     return {
   //         users : null,
