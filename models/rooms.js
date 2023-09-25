@@ -24,8 +24,8 @@ const roomSchema = new mongoose.Schema({
     },
   ],
   sort: Number,
-  create_at: { type: Date, default: Date.now },
-  update_at: { type: Date, default: Date.now },
+  created_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now },
 }, { versionKey: false });
 
 module.exports = mongoose.model("Room", roomSchema, "rooms");

@@ -4,12 +4,12 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;- NodeJS
 
-&nbsp;&nbsp;&nbsp;&nbsp;- MongoDB
+&nbsp;&nbsp;&nbsp;&nbsp;- MongoDBCompass (optional)
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;2. Cài đặt các thư viện
 
 ```c
-npm install express dotenv body-parser morgan mongoose nodemon cors
+npm install
 ```
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;3. Thêm file config

@@ -18,8 +18,8 @@ const userSchema = new mongoose.Schema({
     },
     main_contact: Boolean,
     status: String,
-    create_at: { type: Date, default: Date.now },
-    update_at: { type: Date, default: Date.now },
+    created_at: { type: Date, default: Date.now },
+    updated_at: { type: Date, default: Date.now },
     
 }, { versionKey: false });
 
