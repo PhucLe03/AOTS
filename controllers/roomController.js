@@ -1,65 +1,42 @@
 const Room = require("../models/rooms.js");
 
-function getAllRooms(req, res) {
-  Room.find()
-    // .select('_id name group type')
-    .then((rooms) => {
-      res.status(200).json(rooms);
-    })
-    .catch((error) => {
-      res.status(500).json({ message: "Server error. Please try again." });
-    });
+async function getAllRooms(req, res) {
+  const rooms = await Room.find({});
+  res.send(rooms);
 }
 
-function getRoomById(req, res) {
-  Room.findById(req.params.id)
-    .then((room) => {
-      if (!room) {
-        return res.status(404).json({ message: "Room not found." });
-      }
-      res.status(200).json(room);
-    })
-    .catch((error) => {
-      res.status(500).json({ message: "Server error. Please try again." });
-    });
+async function getRoomById(req, res) {
+  const room = await Room.findById(req.params.id);
+  if (!room) {
+    return res.status(404).json({ message: "Room not found." });
+  }
+  res.send(room);
 }
 
-function createRoom(req, res) {
+async function createRoom(req, res) {
   const newRoom = new Room(req.body);
-  newRoom
-    .save()
-    .then((savedRoom) => {
-      res.status(201).json(savedRoom);
-    })
-    .catch((error) => {
-      res.status(500).json({ message: "Server error. Please try again." });
-    });
+  const savedRoom = await newRoom.save();
+  if (savedRoom) {
+    res.send(savedRoom);
+  }
 }
 
-function updateRoom(req, res) {
-  Room.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    .then((room) => {
-      if (!room) {
-        return res.status(404).json({ message: "Room not found." });
-      }
-      res.status(200).json(room);
-    })
-    .catch((error) => {
-      res.status(500).json({ message: "Server error. Please try again." });
-    });
+async function updateRoom(req, res) {
+  const room = await Room.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+  if (!room) {
+    return res.status(404).send();
+  }
+  res.send(room);
 }
 
-function deleteRoom(req, res) {
-  Room.findByIdAndDelete(req.params.id)
-    .then((room) => {
-      if (!room) {
-        return res.status(404).json({ message: "Room not found." });
-      }
-      res.status(204).json();
-    })
-    .catch((error) => {
-      res.status(500).json({ message: "Server error. Please try again." });
-    });
+async function deleteRoom(req, res) {
+  const room = await Room.findByIdAndDelete(req.params.id);
+  if (!room) {
+    return res.status(404).send();
+  }
+  res.send(true);
 }
 
 function getServicesInRoom(req, res) {

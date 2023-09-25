@@ -1,70 +1,48 @@
 const Service = require("../models/services.js");
 
-function getAllServices(req, res) {
-  Service.find()
-    .then((services) => {
-      res.status(200).json(services);
-    })
-    .catch((error) => {
-      res.status(500).json({ message: "Server error. Please try again." });
-    });
+async function getAllServices(req, res) {
+  const services = await Service.find({});
+  res.send(services);
 }
 
-function getServiceById(req, res) {
-  Service.findById(req.params.id)
-    .then((service) => {
-      if (!service) {
-        return res.status(404).json({ message: "Service not found." });
-      }
-      res.status(200).json(service);
-    })
-    .catch((error) => {
-      res.status(500).json({ message: "Server error. Please try again." });
-    });
+async function getServiceById(req, res) {
+  const service = await Service.findById(req.params.id);
+  if (!service) {
+    return res.status(404).json({ message: "Service not found." });
+  }
+  res.send(service);
 }
 
-function createService(req, res) {
+async function createService(req, res) {
   const newService = new Service(req.body);
-  newService
-    .save()
-    .then((savedService) => {
-      res.status(201).json(savedService);
-    })
-    .catch((error) => {
-      res.status(500).json({ message: "Server error. Please try again." });
-    });
+  const savedService = await newService.save();
+  if (savedService) {
+    res.send(savedService);
+  }
 }
 
-function updateService(req, res) {
-  Service.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    .then((service) => {
-      if (!service) {
-        return res.status(404).json({ message: "Service not found." });
-      }
-      res.status(200).json(service);
-    })
-    .catch((error) => {
-      res.status(500).json({ message: "Server error. Please try again." });
-    });
+async function updateService(req, res) {
+  const service = await Service.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+  if (!service) {
+    return res.status(404).send();
+  }
+  res.send(service);
 }
 
-function deleteService(req, res) {
-  Service.findByIdAndDelete(req.params.id)
-    .then((service) => {
-      if (!service) {
-        return res.status(404).json({ message: "Service not found." });
-      }
-      res.status(204).json();
-    })
-    .catch((error) => {
-      res.status(500).json({ message: "Server error. Please try again." });
-    });
+async function deleteService(req, res) {
+  const service = await Service.findByIdAndDelete(req.params.id);
+  if (!service) {
+    return res.status(404).send();
+  }
+  res.send(true);
 }
 
 module.exports = {
-    getAllServices,
-    getServiceById,
-    createService,
-    updateService,
-    deleteService,
-  };
+  getAllServices,
+  getServiceById,
+  createService,
+  updateService,
+  deleteService,
+};
