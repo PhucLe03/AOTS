@@ -133,7 +133,7 @@
 
 <script>
 import controller from "@/utils/controller";
-import AddService from "@/components/APIs/Add/AddService.vue";
+// import AddService from "@/components/APIs/Add/AddService.vue";
 import ServiceRemove from "@/components/APIs/Alert/ServiceRemove";
 import RegisterModal from "@/components/APIs/RegisterModal.vue";
 import { ref } from "vue";
@@ -203,6 +203,7 @@ export default {
       window.location.reload();
     },
     async Edit(item) {
+      this.chosenService.updated_at = Date.now();
       await controller.updateService(item._id,this.chosenService);
       window.location.reload();
     },
@@ -215,7 +216,7 @@ export default {
     },
   },
   components: {
-    AddService,
+    // AddService,
     ServiceRemove,
     RegisterModal,
   },
