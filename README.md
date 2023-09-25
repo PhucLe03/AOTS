@@ -8,7 +8,7 @@
 ```c
 VUE_APP_PORT=1234
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;Port 1234 là port của backend chạy song song với Vue.
+&nbsp;&nbsp;&nbsp;&nbsp;VUE_APP_PORT là port của back-end chạy song song với Vue, port này phải trùng với port của back-end.
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;3. Chạy trên Terminal
 

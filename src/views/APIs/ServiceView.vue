@@ -12,17 +12,17 @@
     >
       <div style="">
         <div class="form-floating mb-3">
-          <input class="form-control" placeholder="Name" />
+          <input class="form-control" placeholder="Name" v-model="this.serviceData.name"/>
           <label class="form-label">Name</label>
           <span class="text-danger"></span>
         </div>
         <div class="form-floating mb-3">
-          <input class="form-control" placeholder="Unit" />
+          <input class="form-control" placeholder="Unit" v-model="this.serviceData.unit"/>
           <label class="form-label">Unit</label>
           <span class="text-danger"></span>
         </div>
         <div class="form-floating mb-3">
-          <input class="form-control" placeholder="Price" />
+          <input class="form-control" placeholder="Price" v-model="this.serviceData.price"/>
           <label class="form-label">Price</label>
           <span class="text-danger"></span>
         </div>
@@ -116,7 +116,11 @@ export default {
       info: null,
       error: String,
       response: {},
-      serviceData: {},
+      serviceData: {
+        name: String,
+        unit: String,
+        price: Number,
+      },
     };
   },
 
@@ -151,12 +155,16 @@ export default {
     };
   },
   async created() {
+    this.serviceData.name = "";
+    this.serviceData.unit = "";
+    this.serviceData.price = 0;
     this.info = await controller.getServices();
   },
 
   methods: {
     async Create() {
-      console.log('Created a service!!');
+      await controller.createService(this.serviceData);
+      window.location.reload();
     },
     async Delete(item) {
       console.log("remove", item._id);
