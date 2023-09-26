@@ -7,34 +7,19 @@
       :modalActive="addActive"
     >
       <div style="" v-if="addActive">
+        <InputField label="Name" placeholder="Name" v-model="this.serviceData.name"/>
         <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            placeholder="Name"
-            v-model="this.serviceData.name"
-          />
-          <label class="form-label">Name</label>
-          <span class="text-danger"></span>
-        </div>
-        <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            placeholder="Unit"
-            v-model="this.serviceData.unit"
-          />
+          <select
+              class="form-select"
+              id="floatingSelect"
+              v-model="this.serviceData.unit"
+            >
+              <option v-for="item in unitOpt" :key="item" :value="item"> {{ item }}</option>
+            </select>
           <label class="form-label">Unit</label>
           <span class="text-danger"></span>
         </div>
-        <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            type="number"
-            placeholder="Price"
-            v-model="this.serviceData.price"
-          />
-          <label class="form-label">Price</label>
-          <span class="text-danger"></span>
-        </div>
+        <InputField label="Price" type="number" placeholder="Price" v-model="this.serviceData.price"/>
       </div>
       <div v-else>
         <FakeServiceModal/>
@@ -56,33 +41,19 @@
       :modalActive="editActive"
     >
       <div style="" v-if="editActive">
+        <InputField label="Name" placeholder="Unit" v-model="this.chosenService.name"/>
         <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            placeholder="Name"
-            v-model="this.chosenService.name"
-          />
-          <label class="form-label">Name</label>
-          <span class="text-danger"></span>
-        </div>
-        <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            placeholder="Unit"
-            v-model="this.chosenService.unit"
-          />
+          <select
+              class="form-select"
+              id="floatingSelect"
+              v-model="this.chosenService.unit"
+            >
+              <option v-for="item in unitOpt" :key="item" :value="item"> {{ item }}</option>
+            </select>
           <label class="form-label">Unit</label>
           <span class="text-danger"></span>
         </div>
-        <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            placeholder="Price"
-            v-model="this.chosenService.price"
-          />
-          <label class="form-label">Price</label>
-          <span class="text-danger"></span>
-        </div>
+        <InputField label="Price" type="number" placeholder="Price" v-model="this.chosenService.price"/>
       </div>
       <div v-else>
         <FakeServiceModal/>
@@ -103,13 +74,14 @@
       <div v-if="chosenService">
         Are you sure to remove {{ chosenService.name }}?
       </div>
-      <div v-else>Removing...</div>
+      <div v-else-if="removing">Removing...</div>
+      <div v-else>Canceling...</div>
       <hr />
       <button
         class="phuc_button"
         @click="Delete(chosenService)"
         type="button"
-        style="width: 20%"
+        style="width: 20%;"
       >
         Remove
       </button>
@@ -165,7 +137,8 @@
 <script>
 import controller from "@/utils/controller";
 import APIModal from "@/components/APIs/APIModal.vue";
-import FakeServiceModal from "@/components/Fakes/FakeServiceModal.vue"
+import InputField from "@/components/APIs/InputField.vue"
+import FakeServiceModal from "@/components/Fakes/FakeServiceModal.vue";
 import { ref } from "vue";
 
 export default {
@@ -174,7 +147,11 @@ export default {
     return {
       info: null,
       error: String,
+      removing: Boolean,
       response: {},
+      unitOpt: [
+        'Kg','10m2','L','Xe','Phòng','KWh'
+      ],
       serviceData: {
         name: String,
         unit: String,
@@ -223,6 +200,7 @@ export default {
     this.serviceData.name = "";
     this.serviceData.unit = "";
     this.serviceData.price = 0;
+    this.removing = false;
     this.info = await controller.getServices();
   },
 
@@ -240,6 +218,7 @@ export default {
       console.log("remove", item._id);
       await controller.deleteService(item._id);
       this.toggleRemove("");
+      this.removing = true;
       window.location.reload();
       // await controller.getServices();
     },
@@ -248,6 +227,7 @@ export default {
     // AddService,
     APIModal,
     FakeServiceModal,
+    InputField,
   },
 };
 </script>

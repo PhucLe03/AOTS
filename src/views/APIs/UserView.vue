@@ -9,39 +9,15 @@
       <div style="" v-if="addActive">
         <div class="row">
           <div class="col-7">
-            <div class="form-floating mb-3">
-              <input
-                class="form-control"
-                placeholder="Name"
-                v-model="this.renterData.name"
-              />
-              <label class="form-label">Name</label>
-              <span class="text-danger"></span>
-            </div>
+            <InputField label="Name" placeholder="Name" v-model="this.renterData.name"/>
           </div>
           <div class="col-5">
-            <div class="form-floating mb-3">
-              <input
-                class="form-control"
-                placeholder="Phone"
-                v-model="this.renterData.phone"
-              />
-              <label class="form-label">Phone</label>
-              <span class="text-danger"></span>
-            </div>
+            <InputField label="Phone" placeholder="Phone" v-model="this.renterData.phone"/>
           </div>
         </div>
         <div class="row">
           <div class="col-5">
-            <div class="form-floating mb-3">
-              <input
-                class="form-control"
-                placeholder="idcard"
-                v-model="this.renterData.idcard"
-              />
-              <label class="form-label">ID Number</label>
-              <span class="text-danger"></span>
-            </div>
+            <InputField label="ID Number" placeholder="ID" v-model="this.renterData.idcard"/>
           </div>
           <div class="col-3">
             <div class="form-floating mb-3">
@@ -59,75 +35,26 @@
             </div>
           </div>
           <div class="col-4">
-            <div class="form-floating mb-3">
-              <input
-                class="form-control"
-                type="date"
-                placeholder="Birthday"
-                v-model="this.renterData.birthday"
-              />
-              <label class="form-label">Birthday</label>
-              <span class="text-danger"></span>
-            </div>
+            <InputField label="Birthday" type="date" placeholder="Date" v-model="this.renterData.birthday"/>
           </div>
         </div>
         <div class="row">
           <div class="col-4">
-            <div class="form-floating mb-3">
-              <input
-                class="form-control"
-                placeholder="Province"
-                v-model="this.renterData.province"
-              />
-              <label class="form-label">Province</label>
-              <span class="text-danger"></span>
-            </div>
+            <InputField label="Province" placeholder="Province" v-model="this.renterData.province"/>
           </div>
           <div class="col-4">
-            <div class="form-floating mb-3">
-              <input
-                class="form-control"
-                placeholder="District"
-                v-model="this.renterData.district"
-              />
-              <label class="form-label">District</label>
-              <span class="text-danger"></span>
-            </div>
+            <InputField label="District" placeholder="District" v-model="this.renterData.district"/>
           </div>
           <div class="col-4">
-            <div class="form-floating mb-3">
-              <input
-                class="form-control"
-                placeholder="Commune"
-                v-model="this.renterData.commune"
-              />
-              <label class="form-label">Commune</label>
-              <span class="text-danger"></span>
-            </div>
+            <InputField label="Commune" placeholder="Commune" v-model="this.renterData.commune"/>
           </div>
         </div>
         <div class="row">
           <div class="col-8">
-            <div class="form-floating mb-3">
-              <input
-                class="form-control"
-                placeholder="Address"
-                v-model="this.renterData.address"
-              />
-              <label class="form-label">Address</label>
-              <span class="text-danger"></span>
-            </div>
+            <InputField label="Address" placeholder="Address" v-model="this.renterData.address"/>
           </div>
           <div class="col-4">
-            <div class="form-floating mb-3">
-              <input
-                class="form-control"
-                placeholder="Room"
-                v-model="this.renterData.room"
-              />
-              <label class="form-label">Room</label>
-              <span class="text-danger"></span>
-            </div>
+            <InputField label="Room" placeholder="Room" v-model="this.renterData.room.name"/>
           </div>
         </div>
       </div>
@@ -153,39 +80,15 @@
     <div style="" v-if="editActive">
       <div class="row">
         <div class="col-7">
-          <div class="form-floating mb-3">
-            <input
-              class="form-control"
-              placeholder="Name"
-              v-model="this.chosenRenter.name"
-            />
-            <label class="form-label">Name</label>
-            <span class="text-danger"></span>
-          </div>
+          <InputField label="Name" placeholder="Name" v-model="this.chosenRenter.name"/>
         </div>
         <div class="col-5">
-          <div class="form-floating mb-3">
-            <input
-              class="form-control"
-              placeholder="Phone"
-              v-model="this.chosenRenter.phone"
-            />
-            <label class="form-label">Phone</label>
-            <span class="text-danger"></span>
-          </div>
+          <InputField label="Phone" placeholder="Phone" v-model="this.chosenRenter.phone"/>
         </div>
       </div>
       <div class="row">
         <div class="col-5">
-          <div class="form-floating mb-3">
-            <input
-              class="form-control"
-              placeholder="idcard"
-              v-model="this.chosenRenter.idcard"
-            />
-            <label class="form-label">ID Number</label>
-            <span class="text-danger"></span>
-          </div>
+          <InputField label="ID Number" placeholder="ID" v-model="this.chosenRenter.idcard"/>
         </div>
         <div class="col-3">
           <div class="form-floating mb-3">
@@ -203,75 +106,26 @@
           </div>
         </div>
         <div class="col-4">
-          <div class="form-floating mb-3">
-            <input
-              class="form-control"
-              type="date"
-              placeholder="Birthday"
-              v-model="this.chosenRenter.birthday"
-            />
-            <label class="form-label">Birthday</label>
-            <span class="text-danger"></span>
-          </div>
+          <InputField label="Birthday" placeholder="Birthday" v-model="this.chosenRenter.birthday"/>
         </div>
       </div>
       <div class="row">
         <div class="col-4">
-          <div class="form-floating mb-3">
-            <input
-              class="form-control"
-              placeholder="Province"
-              v-model="this.chosenRenter.province"
-            />
-            <label class="form-label">Province</label>
-            <span class="text-danger"></span>
-          </div>
+          <InputField label="Province" placeholder="Province" v-model="this.chosenRenter.province"/>
         </div>
         <div class="col-4">
-          <div class="form-floating mb-3">
-            <input
-              class="form-control"
-              placeholder="District"
-              v-model="this.chosenRenter.district"
-            />
-            <label class="form-label">District</label>
-            <span class="text-danger"></span>
-          </div>
+          <InputField label="District" placeholder="District" v-model="this.chosenRenter.district"/>
         </div>
         <div class="col-4">
-          <div class="form-floating mb-3">
-            <input
-              class="form-control"
-              placeholder="Commune"
-              v-model="this.chosenRenter.commune"
-            />
-            <label class="form-label">Commune</label>
-            <span class="text-danger"></span>
-          </div>
+          <InputField label="Commune" placeholder="Commune" v-model="this.chosenRenter.commune"/>
         </div>
       </div>
       <div class="row">
         <div class="col-8">
-          <div class="form-floating mb-3">
-            <input
-              class="form-control"
-              placeholder="Address"
-              v-model="this.chosenRenter.address"
-            />
-            <label class="form-label">Address</label>
-            <span class="text-danger"></span>
-          </div>
+          <InputField label="Address" placeholder="Address" v-model="this.chosenRenter.address"/>
         </div>
         <div class="col-4">
-          <div class="form-floating mb-3">
-            <input
-              class="form-control"
-              placeholder="Room"
-              v-model="this.chosenRenter.room"
-            />
-            <label class="form-label">Room</label>
-            <span class="text-danger"></span>
-          </div>
+          <InputField label="Room" placeholder="Room" v-model="this.chosenRenter.room.name"/>
         </div>
       </div>
     </div>
@@ -295,7 +149,8 @@
       <div v-if="chosenRenter">
         Are you sure to remove {{ chosenRenter.name }}?
       </div>
-      <div v-else>Removing...</div>
+      <div v-else-if="removing">Removing...</div>
+      <div v-else>Canceling...</div>
       <hr />
       <button
         class="phuc_button"
@@ -373,7 +228,8 @@
 <script>
 import controller from "@/utils/controller";
 import APIModal from "@/components/APIs/APIModal.vue";
-import FakeUserModal from "@/components/Fakes/FakeUserModal.vue"
+import InputField from "@/components/APIs/InputField.vue";
+import FakeUserModal from "@/components/Fakes/FakeUserModal.vue";
 import { ref } from "vue";
 
 export default {
@@ -382,6 +238,7 @@ export default {
     return {
       info: null,
       error: String,
+      removing: Boolean,
       response: {},
       renterData: {
         name: String,
@@ -393,7 +250,9 @@ export default {
         district: String,
         commune: String,
         address: String,
-        room: String,
+        room: {
+          name: String,
+        },
         main_contact: Boolean,
         status: String,
       },
@@ -445,7 +304,9 @@ export default {
     this.renterData.district = "";
     this.renterData.commune = "";
     this.renterData.address = "";
-    this.renterData.room = "";
+    this.renterData.room.name = "";
+
+    this.removing = false;
     this.info = await controller.getUsers();
   },
 
@@ -465,12 +326,14 @@ export default {
       console.log("remove", item._id);
       await controller.deleteUser(item._id);
       this.toggleRemove("");
+      this.removing = true;
       window.location.reload();
     },
   },
   components: {
     APIModal,
     FakeUserModal,
+    InputField,
   },
 };
 </script>

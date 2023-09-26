@@ -7,15 +7,7 @@
       :modalActive="addActive"
     >
       <div style="">
-        <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            placeholder="Name"
-            v-model="this.serviceData.name"
-          />
-          <label class="form-label">Name</label>
-          <span class="text-danger"></span>
-        </div>
+        <InputField label="Name" type="number" placeholder="Unit" v-model="this.serviceData.name"/>
         <div class="form-floating mb-3">
           <input
             class="form-control"
@@ -159,6 +151,7 @@
 <script>
 import controller from "@/utils/controller";
 import APIModal from "@/components/APIs/APIModal.vue";
+import InputField from "@/components/APIs/InputField.vue";
 import { ref } from "vue";
 
 export default {
@@ -240,6 +233,7 @@ export default {
   components: {
     // AddService,
     APIModal,
+    InputField,
   },
 };
 </script>
