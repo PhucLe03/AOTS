@@ -1,29 +1,42 @@
 <template>
   <div class="hello">
     <h1>Services list</h1>
-    <RegisterModal
+    <APIModal
       @close="toggleAdd"
       :modalTitle="addTitle"
       :modalActive="addActive"
     >
       <div style="">
         <div class="form-floating mb-3">
-          <input class="form-control" placeholder="Name" v-model="this.serviceData.name"/>
+          <input
+            class="form-control"
+            placeholder="Name"
+            v-model="this.serviceData.name"
+          />
           <label class="form-label">Name</label>
           <span class="text-danger"></span>
         </div>
         <div class="form-floating mb-3">
-          <input class="form-control" placeholder="Unit" v-model="this.serviceData.unit"/>
+          <input
+            class="form-control"
+            placeholder="Unit"
+            v-model="this.serviceData.unit"
+          />
           <label class="form-label">Unit</label>
           <span class="text-danger"></span>
         </div>
         <div class="form-floating mb-3">
-          <input class="form-control" placeholder="Price" v-model="this.serviceData.price"/>
+          <input
+            class="form-control"
+            type="number"
+            placeholder="Price"
+            v-model="this.serviceData.price"
+          />
           <label class="form-label">Price</label>
           <span class="text-danger"></span>
         </div>
       </div>
-      <hr/>
+      <hr />
       <button
         class="phuc_button"
         @click="Create"
@@ -32,31 +45,43 @@
       >
         Add
       </button>
-    </RegisterModal>
-    
-    <RegisterModal
+    </APIModal>
+
+    <APIModal
       @close="toggleEdit"
       :modalTitle="editTitle"
       :modalActive="editActive"
     >
       <div style="" v-if="editActive">
         <div class="form-floating mb-3">
-          <input class="form-control" placeholder="Name" v-model="this.chosenService.name"/>
+          <input
+            class="form-control"
+            placeholder="Name"
+            v-model="this.chosenService.name"
+          />
           <label class="form-label">Name</label>
           <span class="text-danger"></span>
         </div>
         <div class="form-floating mb-3">
-          <input class="form-control" placeholder="Unit" v-model="this.chosenService.unit"/>
+          <input
+            class="form-control"
+            placeholder="Unit"
+            v-model="this.chosenService.unit"
+          />
           <label class="form-label">Unit</label>
           <span class="text-danger"></span>
         </div>
         <div class="form-floating mb-3">
-          <input class="form-control" placeholder="Price" v-model="this.chosenService.price"/>
+          <input
+            class="form-control"
+            placeholder="Price"
+            v-model="this.chosenService.price"
+          />
           <label class="form-label">Price</label>
           <span class="text-danger"></span>
         </div>
       </div>
-      <hr/>
+      <hr />
       <button
         class="phuc_button"
         @click="Edit(this.chosenService)"
@@ -65,8 +90,8 @@
       >
         Update
       </button>
-    </RegisterModal>
-    <ServiceRemove @close="toggleRemove" :modalActive="removeActive">
+    </APIModal>
+    <APIModal @close="toggleRemove" :modalActive="removeActive">
       <h1>Warning!</h1>
       <hr />
       <div v-if="chosenService">
@@ -82,9 +107,9 @@
       >
         Remove
       </button>
-    </ServiceRemove>
+    </APIModal>
     <div>
-      <table>
+      <table style="width: 50%">
         <tr>
           <th>Name</th>
           <th>Unit</th>
@@ -111,7 +136,7 @@
           </td>
           <td>
             <button
-            @click="toggleEdit(item)"
+              @click="toggleEdit(item)"
               class="phuc_button phuc_edit_button phuc_button_icon"
             >
               <span class="material-symbols-outlined"> edit </span>
@@ -133,12 +158,9 @@
 
 <script>
 import controller from "@/utils/controller";
-// import AddService from "@/components/APIs/Add/AddService.vue";
-import ServiceRemove from "@/components/APIs/Alert/ServiceRemove";
-import RegisterModal from "@/components/APIs/RegisterModal.vue";
+import APIModal from "@/components/APIs/APIModal.vue";
 import { ref } from "vue";
 
-// import { api } from "@/utils/axios";
 export default {
   name: "ServiceView",
   data() {
@@ -156,7 +178,7 @@ export default {
 
   setup() {
     const addTitle = ref("Add a service");
-    const editTitle = ref("Edit service")
+    const editTitle = ref("Edit service");
 
     const addActive = ref(false);
     const toggleAdd = () => {
@@ -204,7 +226,7 @@ export default {
     },
     async Edit(item) {
       this.chosenService.updated_at = Date.now();
-      await controller.updateService(item._id,this.chosenService);
+      await controller.updateService(item._id, this.chosenService);
       window.location.reload();
     },
     async Delete(item) {
@@ -217,8 +239,7 @@ export default {
   },
   components: {
     // AddService,
-    ServiceRemove,
-    RegisterModal,
+    APIModal,
   },
 };
 </script>

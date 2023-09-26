@@ -7,7 +7,7 @@
     </h4>
     <h3 style="color: red">Room: {{ info.name }}</h3>
     <div>
-      <table style="width: 100%">
+      <table style="margin: auto;">
         <tr>
           <th>Group</th>
           <th>Type</th>
@@ -31,7 +31,7 @@
         <h3>No service found.</h3>
       </div>
       <div v-else>
-        <table style="width: 100%">
+        <table style="margin: auto;">
           <tr>
             <th>Service's name</th>
             <th>Unit</th>
@@ -78,6 +78,7 @@ export default {
     this.info = await controller.getRoomByID(roomid);
     controller.setTitle("Room " + this.info.name);
     this.serinfo = await controller.getRoomServices(roomid);
+    console.log(this.serinfo)
     if (this.serinfo !== null) {
       // this.serinfo = nullhandler;
       this.nullservice = false;

@@ -26,11 +26,19 @@ async function getUsers() {
   return users;
 }
 
+async function createUser(data) {
+  await api.post('/user', data);
+}
+
 async function getUserByID(id) {
   const user = api.get("/user/" + id);
   const temp = (await user).data;
   realFormater(temp);
   return temp;
+}
+
+async function deleteUser(id) {
+  api.delete(`user/${id}`);
 }
 
 async function getRooms() {
@@ -44,8 +52,11 @@ async function getRoomByID(id) {
 }
 
 async function getRoomServices(id) {
-  const service = api.get("/room/" + id + "/services");
-  return (await service).data;
+  const service = await api.get("/room/" + id + "/services");
+  // const serId = service.data.serviceId;
+  // const theSer = await api.get("service/" + serId);
+  // return (theSer).data;
+  return service.data;
 }
 
 async function getServices() {
@@ -74,7 +85,9 @@ export default {
   setTitle,
 
   getUsers,
+  createUser,
   getUserByID,
+  deleteUser,
   
   getRooms,
   getRoomByID,

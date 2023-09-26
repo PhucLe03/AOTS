@@ -7,7 +7,7 @@
     </h4>
     <h3 style="color: red">Service: {{ info.name }}</h3>
     <div>
-      <table style="width: 100%">
+      <table style="margin: auto; width: 40%;">
         <tr>
           <th>Unit</th>
           <th>Price</th>
