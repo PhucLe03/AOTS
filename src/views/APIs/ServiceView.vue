@@ -6,7 +6,7 @@
       :modalTitle="addTitle"
       :modalActive="addActive"
     >
-      <div style="">
+      <div style="" v-if="addActive">
         <div class="form-floating mb-3">
           <input
             class="form-control"
@@ -35,6 +35,9 @@
           <label class="form-label">Price</label>
           <span class="text-danger"></span>
         </div>
+      </div>
+      <div v-else>
+        <FakeServiceModal/>
       </div>
       <hr />
       <button
@@ -80,6 +83,9 @@
           <label class="form-label">Price</label>
           <span class="text-danger"></span>
         </div>
+      </div>
+      <div v-else>
+        <FakeServiceModal/>
       </div>
       <hr />
       <button
@@ -159,6 +165,7 @@
 <script>
 import controller from "@/utils/controller";
 import APIModal from "@/components/APIs/APIModal.vue";
+import FakeServiceModal from "@/components/Fakes/FakeServiceModal.vue"
 import { ref } from "vue";
 
 export default {
@@ -240,6 +247,7 @@ export default {
   components: {
     // AddService,
     APIModal,
+    FakeServiceModal,
   },
 };
 </script>

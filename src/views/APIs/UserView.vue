@@ -6,7 +6,7 @@
       :modalTitle="addTitle"
       :modalActive="addActive"
     >
-      <div style="">
+      <div style="" v-if="addActive">
         <div class="row">
           <div class="col-7">
             <div class="form-floating mb-3">
@@ -131,6 +131,9 @@
           </div>
         </div>
       </div>
+      <div v-else>
+        <FakeUserModal/>
+      </div>
       <hr />
       <button
         class="phuc_button"
@@ -142,7 +145,150 @@
       </button>
     </APIModal>
     <!-- <button @click="fetchData">Fetch</button> -->
-    
+    <APIModal
+      @close="toggleEdit"
+      :modalTitle="editTitle"
+      :modalActive="editActive"
+    >
+    <div style="" v-if="editActive">
+      <div class="row">
+        <div class="col-7">
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              placeholder="Name"
+              v-model="this.chosenRenter.name"
+            />
+            <label class="form-label">Name</label>
+            <span class="text-danger"></span>
+          </div>
+        </div>
+        <div class="col-5">
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              placeholder="Phone"
+              v-model="this.chosenRenter.phone"
+            />
+            <label class="form-label">Phone</label>
+            <span class="text-danger"></span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-5">
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              placeholder="idcard"
+              v-model="this.chosenRenter.idcard"
+            />
+            <label class="form-label">ID Number</label>
+            <span class="text-danger"></span>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-floating mb-3">
+            <select
+              class="form-select"
+              id="floatingSelect"
+              v-model="this.chosenRenter.sex"
+            >
+              <option selected>Choose</option>
+              <option value="true">Male</option>
+              <option value="false">Female</option>
+            </select>
+            <label class="form-label">Gender</label>
+            <span class="text-danger"></span>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              type="date"
+              placeholder="Birthday"
+              v-model="this.chosenRenter.birthday"
+            />
+            <label class="form-label">Birthday</label>
+            <span class="text-danger"></span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              placeholder="Province"
+              v-model="this.chosenRenter.province"
+            />
+            <label class="form-label">Province</label>
+            <span class="text-danger"></span>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              placeholder="District"
+              v-model="this.chosenRenter.district"
+            />
+            <label class="form-label">District</label>
+            <span class="text-danger"></span>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              placeholder="Commune"
+              v-model="this.chosenRenter.commune"
+            />
+            <label class="form-label">Commune</label>
+            <span class="text-danger"></span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8">
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              placeholder="Address"
+              v-model="this.chosenRenter.address"
+            />
+            <label class="form-label">Address</label>
+            <span class="text-danger"></span>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              placeholder="Room"
+              v-model="this.chosenRenter.room"
+            />
+            <label class="form-label">Room</label>
+            <span class="text-danger"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-else>
+      <FakeUserModal/>
+    </div>
+    <hr />
+      <button
+        class="phuc_button"
+        @click="Edit(this.chosenRenter)"
+        type="button"
+        style="width: 30%; background-color: green"
+      >
+        Update
+      </button>
+    </APIModal>
+
     <APIModal @close="toggleRemove" :modalActive="removeActive">
       <h1>Warning!</h1>
       <hr />
@@ -227,6 +373,7 @@
 <script>
 import controller from "@/utils/controller";
 import APIModal from "@/components/APIs/APIModal.vue";
+import FakeUserModal from "@/components/Fakes/FakeUserModal.vue"
 import { ref } from "vue";
 
 export default {
@@ -254,7 +401,7 @@ export default {
   },
   setup() {
     const addTitle = ref("Add a renter");
-    const editTitle = ref("Edit service");
+    const editTitle = ref("Edit renter");
 
     const addActive = ref(false);
     const toggleAdd = () => {
@@ -304,10 +451,16 @@ export default {
 
   methods: {
     async Create() {
+      // this.chosenRenter.created_at = Date.now();
+      // this.chosenRenter.updated_at = Date.now();
       await controller.createUser(this.renterData);
       window.location.reload();
     },
-
+    async Edit(item) {
+      this.chosenRenter.updated_at = Date.now();
+      await controller.updateUser(item._id, this.chosenRenter);
+      window.location.reload();
+    },
     async Delete(item) {
       console.log("remove", item._id);
       await controller.deleteUser(item._id);
@@ -317,6 +470,7 @@ export default {
   },
   components: {
     APIModal,
+    FakeUserModal,
   },
 };
 </script>
