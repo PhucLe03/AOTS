@@ -14,26 +14,35 @@ function setTitle(title) {
 //   return data;
 // }
 
+function dateFormat(date, formatString) {
+  return moment(date).format(formatString);
+}
+
 //for User
 function realFormater(item, dateFormatString = "DD/MM/YYYY", sexString = ["Male", "Female"]) {
-  item.birthday_format = moment(item.birthday).format(dateFormatString);
-  item.birthday_format_input = moment(item.birthday).format("YYYY-MM-DD");
+  // item.birthday_format = moment(item.birthday).format(dateFormatString);
+  // item.birthday_format_input = moment(item.birthday).format("YYYY-MM-DD");
   // item.birthday_format_input = item.birthday;
+  item.birthday_format = dateFormat(item.birthday,dateFormatString);
+  item.birthday_format_input = dateFormat(item.birthday,"YYYY-MM-DD");
   item.sex_f = item.sex ? sexString[0] : sexString[1];
 }
 
 //for Room
 function unrealFormatter(item) {
-  item.day_of_hire_format = moment(item.day_of_hire).format("DD/MM/YYYY");
-  item.day_of_hire_format_input = moment(item.day_of_hire).format("YYYY-MM-DD");
-  item.expiration_date_format = moment(item.expiration_date).format("DD/MM/YYYY");
-  item.expiration_date_format_input = moment(item.expiration_date).format("YYYY-MM-DD");
+  item.day_of_hire_format = dateFormat(item.day_of_hire,"DD/MM/YYYY");
+  item.day_of_hire_format_input = dateFormat(item.day_of_hire,"YYYY-MM-DD");
+  item.expiration_date_format = dateFormat(item.expiration_date,"DD/MM/YYYY");
+  item.expiration_date_format_input = dateFormat(item.expiration_date,"YYYY-MM-DD");
   if (item.type==='small') item.capacity = 1;
   else if (item.type==='medium') item.capacity = 2;
   else if (item.type==='large') item.capacity = 4;
   if (item.renter<item.capacity) item.status = 'available';
   else item.status = 'full';
 }
+
+//for Service
+// function anotherFormatter(item) {}
 
 async function getUsers() {
   const data = api.get("/users");

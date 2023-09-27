@@ -33,11 +33,11 @@
             <InputField label="Price" type="number" placeholder="Price" v-model="this.roomData.price"/>
           </div>
           <div class="col-4">
-            <DateInput label="Date of hire" dateformat="DD/MM/YYYY" placeholder="Hire date" v-model="this.roomData.day_of_hire"/>
+            <DateInput label="Date of hire (mm/dd/yyyy)" dateformat="DD/MM/YYYY" placeholder="Hire date" v-model="this.roomData.day_of_hire"/>
             <!-- <InputField label="Date of hire" type="date" placeholder="Hire date" v-model="this.roomData.day_of_hire"/> -->
           </div>
           <div class="col-4">
-            <DateInput label="Expiration Date" dateformat="DD/MM/YYYY" placeholder="Expired date" v-model="this.roomData.expiration_date"/>
+            <DateInput label="Expire Date (mm/dd/yyyy)" dateformat="DD/MM/YYYY" placeholder="Expired date" v-model="this.roomData.expiration_date"/>
             <!-- <InputField label="Expiration Date" type="date" placeholder="Expired date" v-model="this.roomData.expiration_date"/> -->
           </div>
         </div>
@@ -96,11 +96,11 @@
         </div>
         <div class="row">
           <div class="col-6">
-            <DateInput label="Date of hire" dateformat="DD/MM/YYYY" placeholder="Hire date" v-model="this.chosenRoom.day_of_hire_format_input"/>
+            <DateInput label="Date of hire (mm/dd/yyyy)" dateformat="DD/MM/YYYY" placeholder="Hire date" v-model="this.chosenRoom.day_of_hire_format_input"/>
             <!-- <InputField label="Date of hire" type="date" placeholder="Hire date" v-model="this.chosenRoom.day_of_hire"/> -->
           </div>
           <div class="col-6">
-            <DateInput label="Expiration Date" dateformat="DD/MM/YYYY" placeholder="Expired date" v-model="this.chosenRoom.expiration_date_format_input"/>
+            <DateInput label="Expire Date (mm/dd/yyyy)" dateformat="DD/MM/YYYY" placeholder="Expired date" v-model="this.chosenRoom.expiration_date_format_input"/>
             <!-- <InputField label="Expiration Date" type="date" placeholder="Expired date" v-model="this.chosenRoom.expiration_date"/> -->
           </div>
           <!-- <div class="col-4">

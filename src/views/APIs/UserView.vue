@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="col-4">
-            <InputField label="Birthday" type="date" placeholder="Date" v-model="this.renterData.birthday"/>
+            <InputField label="Birthday (mm/dd/yyyy)" type="date" placeholder="Date" v-model="this.renterData.birthday"/>
           </div>
         </div>
         <div class="row">
@@ -58,7 +58,7 @@
               <select
                   class="form-select"
                   id="floatingSelect"
-                  v-model="this.renterData.room"
+                  v-model="this.renterData.room_input"
                 >
                   <option v-for="item in availRooms" :key="item" :value="item"> {{ item.name }}</option>
                 </select>
@@ -123,7 +123,7 @@
               <label class="form-label">Birthday</label>
             </div>
           </div> -->
-          <DateInput label="Birthday" dateformat="DD/MM/YYYY" placeholder="Birthday" v-model="this.chosenRenter.birthday_format_input"/>
+          <DateInput label="Birthday (mm/dd/yyyy)" dateformat="DD/MM/YYYY" placeholder="Birthday" v-model="this.chosenRenter.birthday_format_input"/>
         </div>
       </div>
       <div class="row">
@@ -150,7 +150,7 @@
               >
                 <option v-for="item in availRooms" :key="item" :value="item"> {{ item.name }}</option>
               </select>
-            <label class="form-label">Room</label>
+            <label class="form-label">Room (current: {{ chosenRenter.room.name }})</label>
             <span class="text-danger"></span>
           </div>
           <!-- <InputField label="Room" placeholder="Room" v-model="this.chosenRenter.room.name"/> -->
@@ -189,6 +189,9 @@
         Remove
       </button>
     </APIModal>
+    <!-- <div>
+      <h6>{{this.availRooms}}</h6>
+    </div> -->
     <div>
       <table>
         <tr>
@@ -309,6 +312,12 @@ export default {
     const editActive = ref(false);
     function toggleEdit(item) {
       chosenRenter.value = item;
+      // if (item!==null) {
+      //   if (item.room!==null) {
+      //     chosenRenter.value.room_input = item.room;
+      //     chosenRenter.value.room_input.name = item.room.name;
+      //   }
+      // }
       editActive.value = !editActive.value;
     }
 
@@ -337,7 +346,7 @@ export default {
     this.renterData.district = "";
     this.renterData.commune = "";
     this.renterData.address = "";
-    this.renterData.room.name = "";
+    // this.renterData.room.name = "";
     this.removing = false;
 
     this.availRooms = await controller.getMTRooms();
@@ -348,10 +357,18 @@ export default {
     async Create() {
       // this.chosenRenter.created_at = Date.now();
       // this.chosenRenter.updated_at = Date.now();
-      if (this.renterData.room!==null) {
-        await controller.addRenterToRoom(this.renterData.room._id, 1);
+      if (this.renterData.room_input!==null) {
+        // console.log('Không NULL');
+        // console.log(this.renterData.room);
+        this.renterData.room.roomId = this.renterData.room_input._id;
+        this.renterData.room.name = this.renterData.room_input.name;
+        await controller.addRenterToRoom(this.renterData.room_input._id, 1);
       }
+      // console.log("Creating...")
       await controller.createUser(this.renterData);
+      const updatedRoom = await controller.getRoomByID(this.renterData.room.roomId);
+      // console.log(updatedRoom.status);
+      await controller.updateRoom(this.renterData.room.roomId, updatedRoom);
       window.location.reload();
     },
     async Edit(item) {
@@ -368,10 +385,14 @@ export default {
         await controller.addRenterToRoom(item.room_input._id, 1);
       }
       await controller.updateUser(item._id, item);
+      const updatedRoom = await controller.getRoomByID(item.room.roomId);
+      // console.log(updatedRoom.status);
+      await controller.updateRoom(item.room.roomId, updatedRoom);
       window.location.reload();
     },
     async Delete(item) {
-      console.log("remove", item._id);
+      // console.log("remove", item._id);
+      // await controller.addRenterToRoom(item.room.roomId, -1);
       await controller.deleteUser(item._id);
       this.toggleRemove("");
       this.removing = true;
