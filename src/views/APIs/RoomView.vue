@@ -43,8 +43,7 @@
         </div>
       </div>
       <div v-else>
-        <!-- <FakeRoomModal/> -->
-        <h1>Hello</h1>
+        <FakeAddRoomModal/>
       </div>
       <hr />
       <button
@@ -85,32 +84,32 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-4">
+          <div class="col-6">
             <InputField label="Price" type="number" placeholder="Price" v-model="this.chosenRoom.price"/>
           </div>
-          <div class="col-4">
+          <div class="col-6">
             <InputField label="Deposit" type="number" placeholder="Deposit" v-model="this.chosenRoom.deposit"/>
           </div>
-          <div class="col-4">
+          <!-- <div class="col-4">
             <InputField label="Renter" type="number" placeholder="Renter" v-model="this.chosenRoom.renter"/>
-          </div>
+          </div> -->
         </div>
         <div class="row">
-          <div class="col-4">
+          <div class="col-6">
             <DateInput label="Date of hire" dateformat="DD/MM/YYYY" placeholder="Hire date" v-model="this.chosenRoom.day_of_hire_format_input"/>
             <!-- <InputField label="Date of hire" type="date" placeholder="Hire date" v-model="this.chosenRoom.day_of_hire"/> -->
           </div>
-          <div class="col-4">
+          <div class="col-6">
             <DateInput label="Expiration Date" dateformat="DD/MM/YYYY" placeholder="Expired date" v-model="this.chosenRoom.expiration_date_format_input"/>
             <!-- <InputField label="Expiration Date" type="date" placeholder="Expired date" v-model="this.chosenRoom.expiration_date"/> -->
           </div>
-          <div class="col-4">
+          <!-- <div class="col-4">
             <InputField label="Sort" type="number" placeholder="Sort" v-model="this.chosenRoom.sort"/>
-          </div>
+          </div> -->
         </div>
       </div>
       <div v-else>
-        <h1>Hello</h1>
+        <FakeEditRoomModal/>
       </div>
       <hr/>
       <button
@@ -225,7 +224,9 @@ import { ref } from 'vue';
 import controller from '@/utils/controller';
 import APIModal from '@/components/APIs/APIModal.vue';
 import InputField from '@/components/APIs/InputField.vue';
-import DateInput from '@/components/APIs/DateInput.vue'
+import DateInput from '@/components/APIs/DateInput.vue';
+import FakeEditRoomModal from '@/components/Fakes/FakeEditRoomModal.vue';
+import FakeAddRoomModal from '@/components/Fakes/FakeAddRoomModal.vue';
 
 export default {
   name: "RoomView",
@@ -343,6 +344,8 @@ export default {
     APIModal,
     InputField,
     DateInput,
+    FakeAddRoomModal,
+    FakeEditRoomModal,
   }
 };
 </script>
