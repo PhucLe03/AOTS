@@ -15,6 +15,14 @@ async function getUserById(req, res) {
   res.send(user);
 }
 
+async function getUserRoomById(req, res) {
+  const user = await User.findById(req.params.id);
+  if (!user) {
+    return res.status(404).json({ message: "User not found." });
+  }
+  res.send(user.room);
+}
+
 async function createUser(req, res) {
   const newUser = new User(req.body);
   const savedUser = await newUser.save();
@@ -49,7 +57,8 @@ async function deleteUser(req, res) {
 module.exports = {
   getAllUsers,
   getUserById,
+  getUserRoomById,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
 };

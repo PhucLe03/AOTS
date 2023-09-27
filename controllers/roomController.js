@@ -50,7 +50,8 @@ function getServicesInRoom(req, res) {
       const services = room.services.map(
         (serviceData) => serviceData.serviceId
       );
-      res.status(200).json(services);
+      res.send(services);
+      // res.status(200).json(services);
     })
     .catch((error) => {
       res.status(500).json({ message: "Server error. Please try again." });
