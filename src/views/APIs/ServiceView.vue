@@ -215,7 +215,7 @@ export default {
       window.location.reload();
     },
     async Delete(item) {
-      console.log("remove", item._id);
+      // console.log("remove", item._id);
       await controller.deleteService(item._id);
       this.toggleRemove("");
       this.removing = true;

@@ -106,7 +106,13 @@
           </div>
         </div>
         <div class="col-4">
-          <InputField label="Birthday" placeholder="Birthday" v-model="this.chosenRenter.birthday"/>
+          <!-- <div>
+            <div class="form-floating mb-3">
+              <input class="form-control" type="date" data-date-format="DD/MM/YYYY" placeholder="Birthday" v-model="this.chosenRenter.birthday_format_input"/>
+              <label class="form-label">Birthday</label>
+            </div>
+          </div> -->
+          <DateInput label="Birthday" dateformat="DD/MM/YYYY" placeholder="Birthday" v-model="this.chosenRenter.birthday_format_input"/>
         </div>
       </div>
       <div class="row">
@@ -229,8 +235,11 @@
 import controller from "@/utils/controller";
 import APIModal from "@/components/APIs/APIModal.vue";
 import InputField from "@/components/APIs/InputField.vue";
+import DateInput from "@/components/APIs/DateInput.vue";
+
 import FakeUserModal from "@/components/Fakes/FakeUserModal.vue";
 import { ref } from "vue";
+// import moment from "moment";
 
 export default {
   name: "UserView",
@@ -318,6 +327,7 @@ export default {
       window.location.reload();
     },
     async Edit(item) {
+      this.chosenRenter.birthday = this.chosenRenter.birthday_format_input;
       this.chosenRenter.updated_at = Date.now();
       await controller.updateUser(item._id, this.chosenRenter);
       window.location.reload();
@@ -334,6 +344,7 @@ export default {
     APIModal,
     FakeUserModal,
     InputField,
+    DateInput,
   },
 };
 </script>

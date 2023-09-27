@@ -16,6 +16,8 @@ function setTitle(title) {
 
 function realFormater(item, dateFormatString = "DD/MM/YYYY", sexString = ["Male", "Female"]) {
   item.birthday_format = moment(item.birthday).format(dateFormatString);
+  item.birthday_format_input = moment(item.birthday).format("YYYY-MM-DD");
+  // item.birthday_format_input = item.birthday;
   item.sex_f = item.sex ? sexString[0] : sexString[1];
 }
 
@@ -50,9 +52,17 @@ async function getRooms() {
   return (await rooms).data;
 }
 
+async function createRoom(data) {
+  await api.post('/room', data);
+}
+
 async function getRoomByID(id) {
   const room = api.get(`/room/${id}`);
   return (await room).data;
+}
+
+async function updateRoom(id,data) {
+  await api.put(`/room/${id}`,data);
 }
 
 async function getRoomServices(id) {
@@ -61,6 +71,10 @@ async function getRoomServices(id) {
   // const theSer = await api.get("service/" + serId);
   // return (theSer).data;
   return service.data;
+}
+
+async function deleteRoom(id) {
+  api.delete(`room/${id}`);
 }
 
 async function getServices() {
@@ -95,8 +109,11 @@ export default {
   deleteUser,
   
   getRooms,
+  createRoom,
   getRoomByID,
+  updateRoom,
   getRoomServices,
+  deleteRoom,
   
   getServices,
   createService,

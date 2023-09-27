@@ -31,7 +31,7 @@
         <h3>No service found.</h3>
       </div>
       <div v-else>
-        <table style="margin: auto;">
+        <table style="margin: auto; width: 40%;">
           <tr>
             <th>Service's name</th>
             <th>Unit</th>
