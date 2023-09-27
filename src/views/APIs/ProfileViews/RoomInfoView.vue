@@ -14,7 +14,10 @@
           <th>Price</th>
           <th>Deposit</th>
           <th>Debt</th>
+          <th>Renter</th>
           <th>Status</th>
+          <th>Date of hire</th>
+          <th>Expiration date</th>
         </tr>
         <tr>
           <td>{{ info.group }}</td>
@@ -22,7 +25,10 @@
           <td>{{ info.price }}</td>
           <td>{{ info.deposit }}</td>
           <td>{{ info.debt }}</td>
+          <td>{{ info.renter }} / {{ info.capacity }}</td>
           <td>{{ info.status }}</td>
+          <td>{{ info.day_of_hire_format }}</td>
+          <td>{{ info.expiration_date_format }}</td>
         </tr>
       </table>
       <h3>Services List</h3>

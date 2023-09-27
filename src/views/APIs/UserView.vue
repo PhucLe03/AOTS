@@ -54,7 +54,18 @@
             <InputField label="Address" placeholder="Address" v-model="this.renterData.address"/>
           </div>
           <div class="col-4">
-            <InputField label="Room" placeholder="Room" v-model="this.renterData.room.name"/>
+            <div class="form-floating mb-3">
+              <select
+                  class="form-select"
+                  id="floatingSelect"
+                  v-model="this.renterData.room"
+                >
+                  <option v-for="item in availRooms" :key="item" :value="item"> {{ item.name }}</option>
+                </select>
+              <label class="form-label">Room</label>
+              <span class="text-danger"></span>
+            </div>
+            <!-- <InputField label="Room" placeholder="Room" v-model="this.renterData.room.name"/> -->
           </div>
         </div>
       </div>
@@ -131,7 +142,18 @@
           <InputField label="Address" placeholder="Address" v-model="this.chosenRenter.address"/>
         </div>
         <div class="col-4">
-          <InputField label="Room" placeholder="Room" v-model="this.chosenRenter.room.name"/>
+          <div class="form-floating mb-3">
+            <select
+                class="form-select"
+                id="floatingSelect"
+                v-model="this.chosenRenter.room_input"
+              >
+                <option v-for="item in availRooms" :key="item" :value="item"> {{ item.name }}</option>
+              </select>
+            <label class="form-label">Room</label>
+            <span class="text-danger"></span>
+          </div>
+          <!-- <InputField label="Room" placeholder="Room" v-model="this.chosenRenter.room.name"/> -->
         </div>
       </div>
     </div>
@@ -207,7 +229,7 @@
             {{ item.commune }}
           </td>
           <td>
-            {{ item.room }}
+            {{ item.room.name }}
           </td>
           <td>
             <button
@@ -249,6 +271,7 @@ export default {
       error: String,
       removing: Boolean,
       response: {},
+      availRooms: [],
       renterData: {
         name: String,
         phone: String,
@@ -260,6 +283,7 @@ export default {
         commune: String,
         address: String,
         room: {
+          roomId: String,
           name: String,
         },
         main_contact: Boolean,
@@ -276,7 +300,7 @@ export default {
       addActive.value = !addActive.value;
     };
     const removeActive = ref(false);
-    const chosenRenter = ref("");
+    const chosenRenter = ref(null);
     function toggleRemove(item) {
       chosenRenter.value = item;
       removeActive.value = !removeActive.value;
@@ -314,8 +338,9 @@ export default {
     this.renterData.commune = "";
     this.renterData.address = "";
     this.renterData.room.name = "";
-
     this.removing = false;
+
+    this.availRooms = await controller.getMTRooms();
     this.info = await controller.getUsers();
   },
 
@@ -323,13 +348,26 @@ export default {
     async Create() {
       // this.chosenRenter.created_at = Date.now();
       // this.chosenRenter.updated_at = Date.now();
+      if (this.renterData.room!==null) {
+        await controller.addRenterToRoom(this.renterData.room._id, 1);
+      }
       await controller.createUser(this.renterData);
       window.location.reload();
     },
     async Edit(item) {
-      this.chosenRenter.birthday = this.chosenRenter.birthday_format_input;
-      this.chosenRenter.updated_at = Date.now();
-      await controller.updateUser(item._id, this.chosenRenter);
+      item.birthday = item.birthday_format_input;
+      item.updated_at = Date.now();
+      // console.log(item.room_input._id);
+      if (item.room_input!==null) {
+        //Add and subtract
+        if (item.room!==null) {
+          await controller.addRenterToRoom(item.room.roomId, -1);
+        }
+        item.room = item.room_input;
+        item.room.roomId = item.room_input._id;
+        await controller.addRenterToRoom(item.room_input._id, 1);
+      }
+      await controller.updateUser(item._id, item);
       window.location.reload();
     },
     async Delete(item) {

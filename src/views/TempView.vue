@@ -1,131 +1,64 @@
 <template>
   <div class="hello">
-    <h1>Services list</h1>
-    <APIModal
-      @close="toggleAdd"
-      :modalTitle="addTitle"
-      :modalActive="addActive"
-    >
-      <div style="">
-        <InputField label="Name" type="number" placeholder="Unit" v-model="this.serviceData.name"/>
-        <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            placeholder="Unit"
-            v-model="this.serviceData.unit"
-          />
-          <label class="form-label">Unit</label>
-          <span class="text-danger"></span>
-        </div>
-        <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            type="number"
-            placeholder="Price"
-            v-model="this.serviceData.price"
-          />
-          <label class="form-label">Price</label>
-          <span class="text-danger"></span>
-        </div>
-      </div>
-      <hr />
-      <button
-        class="phuc_button"
-        @click="Create"
-        type="button"
-        style="width: 30%; background-color: green"
-      >
-        Add
-      </button>
-    </APIModal>
-
-    <APIModal
-      @close="toggleEdit"
-      :modalTitle="editTitle"
-      :modalActive="editActive"
-    >
-      <div style="" v-if="editActive">
-        <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            placeholder="Name"
-            v-model="this.chosenService.name"
-          />
-          <label class="form-label">Name</label>
-          <span class="text-danger"></span>
-        </div>
-        <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            placeholder="Unit"
-            v-model="this.chosenService.unit"
-          />
-          <label class="form-label">Unit</label>
-          <span class="text-danger"></span>
-        </div>
-        <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            placeholder="Price"
-            v-model="this.chosenService.price"
-          />
-          <label class="form-label">Price</label>
-          <span class="text-danger"></span>
-        </div>
-      </div>
-      <hr />
-      <button
-        class="phuc_button"
-        @click="Edit(this.chosenService)"
-        type="button"
-        style="width: 30%; background-color: green"
-      >
-        Update
-      </button>
-    </APIModal>
-    <APIModal @close="toggleRemove" :modalActive="removeActive">
-      <h1>Warning!</h1>
-      <hr />
-      <div v-if="chosenService">
-        Are you sure to remove {{ chosenService.name }}?
-      </div>
-      <div v-else>Removing...</div>
-      <hr />
-      <button
-        class="phuc_button"
-        @click="Delete(chosenService)"
-        type="button"
-        style="width: 20%"
-      >
-        Remove
-      </button>
-    </APIModal>
+    <h1>Available rooms list</h1>
     <div>
-      <table style="width: 50%">
+      <table>
         <tr>
           <th>Name</th>
-          <th>Unit</th>
+          <th>Group</th>
+          <th>Type</th>
           <th>Price</th>
+          <th>Deposit</th>
+          <th>Debt</th>
+          <th>Renters</th>
+          <th>Status</th>
+          <th>Date of hire</th>
+          <th>Expiration date</th>
+          <!-- <th>Sort</th> -->
           <th>
             <button
               class="phuc_button phuc_add_button"
               @click="toggleAdd"
               type="button"
             >
-              Add Service
+              Add Room
             </button>
           </th>
         </tr>
         <tr v-for="item in info" :key="item._id">
           <td>
-            <a :href="'/api/service/' + item._id">{{ item.name }}</a>
+            <a :href="'/api/room/' + item._id">{{ item.name }}</a>
           </td>
           <td>
-            {{ item.unit }}
+            {{ item.group }}
+          </td>
+          <td>
+            {{ item.type }}
           </td>
           <td>
             {{ item.price }}
           </td>
+          <td>
+            {{ item.deposit }}
+          </td>
+          <td>
+            {{ item.debt }}
+          </td>
+          <td>
+            {{ item.renter }} / {{ item.capacity }}
+          </td>
+          <td>
+            {{ item.status }}
+          </td>
+          <td>
+            {{ item.day_of_hire_format }}
+          </td>
+          <td>
+            {{ item.expiration_date_format }}
+          </td>
+          <!-- <td>
+            {{ item.sort }}
+          </td> -->
           <td>
             <button
               @click="toggleEdit(item)"
@@ -149,44 +82,63 @@
 </template>
 
 <script>
-import controller from "@/utils/controller";
-import APIModal from "@/components/APIs/APIModal.vue";
-import InputField from "@/components/APIs/InputField.vue";
-import { ref } from "vue";
+import { ref } from 'vue';
+import controller from '@/utils/controller';
+// import APIModal from '@/components/APIs/APIModal.vue';
+// import InputField from '@/components/APIs/InputField.vue';
+// import DateInput from '@/components/APIs/DateInput.vue'
 
 export default {
-  name: "ServiceView",
+  name: "RoomView",
   data() {
     return {
       info: null,
       error: String,
+      removing: Boolean,
       response: {},
-      serviceData: {
+      typeOpt: [
+        'small', 'medium', 'large'
+      ],
+      roomData: {
         name: String,
-        unit: String,
+        group: String,
+        type: String,
         price: Number,
+        deposit: Number,
+        debt: Number,
+        renter: Number,
+        day_of_hire: Date,
+        expiration_date: Date,
+        status: String,
+        services: [],
+        sort: Number,
       },
     };
   },
+  // computed: {
+  //   orderedRoom: function () {
+  //     return _.orderBy(this.info, 'sort')
+  //   }
+  // },
 
   setup() {
-    const addTitle = ref("Add a service");
-    const editTitle = ref("Edit service");
+    const addTitle = ref("Add a room");
+    const editTitle = ref("Edit room");
 
     const addActive = ref(false);
     const toggleAdd = () => {
       addActive.value = !addActive.value;
     };
     const removeActive = ref(false);
-    const chosenService = ref("");
+    const chosenRoom = ref("");
     function toggleRemove(item) {
-      chosenService.value = item;
+      chosenRoom.value = item;
       removeActive.value = !removeActive.value;
     }
 
     const editActive = ref(false);
     function toggleEdit(item) {
-      chosenService.value = item;
+      chosenRoom.value = item;
       editActive.value = !editActive.value;
     }
 
@@ -198,7 +150,7 @@ export default {
       toggleAdd,
 
       removeActive,
-      chosenService,
+      chosenRoom,
       toggleRemove,
 
       editActive,
@@ -206,35 +158,37 @@ export default {
     };
   },
   async created() {
-    this.serviceData.name = "";
-    this.serviceData.unit = "";
-    this.serviceData.price = 0;
-    this.info = await controller.getServices();
+    this.info = await controller.getMTRooms();
   },
 
   methods: {
     async Create() {
-      await controller.createService(this.serviceData);
+      this.roomData.debt = this.roomData.price;
+      await controller.createRoom(this.roomData);
       window.location.reload();
     },
     async Edit(item) {
-      this.chosenService.updated_at = Date.now();
-      await controller.updateService(item._id, this.chosenService);
+      this.chosenRoom.day_of_hire = this.chosenRoom.day_of_hire_format_input;
+      this.chosenRoom.expiration_date = this.chosenRoom.expiration_date_format_input;
+      this.chosenRoom.debt = this.chosenRoom.price - this.chosenRoom.deposit;
+      this.chosenRoom.updated_at = Date.now();
+      await controller.updateRoom(item._id, this.chosenRoom);
       window.location.reload();
     },
     async Delete(item) {
-      console.log("remove", item._id);
-      await controller.deleteService(item._id);
+      // console.log("remove", item._id);
+      await controller.deleteRoom(item._id);
       this.toggleRemove("");
+      this.removing = true;
       window.location.reload();
       // await controller.getServices();
     },
   },
   components: {
-    // AddService,
-    APIModal,
-    InputField,
-  },
+    // APIModal,
+    // InputField,
+    // DateInput,
+  }
 };
 </script>
 

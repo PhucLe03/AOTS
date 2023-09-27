@@ -9,7 +9,6 @@ defineEmits(["update:modelValue"]);
       <input
       type="date"
       
-      :datatype="dateformat"
       :placeholder="props.placeholder"
       :value="props.modelValue"
       @input="$emit('update:modelValue', $event.target.value)"

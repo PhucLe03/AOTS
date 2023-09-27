@@ -14,7 +14,18 @@
             <InputField label="Group" placeholder="Group" v-model="this.roomData.group"/>
           </div>
           <div class="col-4">
-            <InputField label="Type" placeholder="Type" v-model="this.roomData.type"/>
+            <div class="form-floating mb-3">
+              <select
+                  class="form-select"
+                  id="floatingSelect"
+                  v-model="this.roomData.type"
+                >
+                  <option v-for="item in typeOpt" :key="item" :value="item"> {{ item }}</option>
+                </select>
+              <label class="form-label">Type</label>
+              <span class="text-danger"></span>
+            </div>
+            <!-- <InputField label="Type" placeholder="Type" v-model="this.roomData.type"/> -->
           </div>
         </div>
         <div class="row">
@@ -22,15 +33,17 @@
             <InputField label="Price" type="number" placeholder="Price" v-model="this.roomData.price"/>
           </div>
           <div class="col-4">
-            <InputField label="Date of hire" type="date" placeholder="Hire date" v-model="this.roomData.day_of_hire"/>
+            <DateInput label="Date of hire" dateformat="DD/MM/YYYY" placeholder="Hire date" v-model="this.roomData.day_of_hire"/>
+            <!-- <InputField label="Date of hire" type="date" placeholder="Hire date" v-model="this.roomData.day_of_hire"/> -->
           </div>
           <div class="col-4">
-            <InputField label="Expiration Date" type="date" placeholder="Expired date" v-model="this.roomData.expiration_date"/>
+            <DateInput label="Expiration Date" dateformat="DD/MM/YYYY" placeholder="Expired date" v-model="this.roomData.expiration_date"/>
+            <!-- <InputField label="Expiration Date" type="date" placeholder="Expired date" v-model="this.roomData.expiration_date"/> -->
           </div>
         </div>
       </div>
       <div v-else>
-        <!-- <FakeServiceModal/> -->
+        <!-- <FakeRoomModal/> -->
         <h1>Hello</h1>
       </div>
       <hr />
@@ -57,7 +70,18 @@
             <InputField label="Group" placeholder="Group" v-model="this.chosenRoom.group"/>
           </div>
           <div class="col-4">
-            <InputField label="Type" placeholder="Type" v-model="this.chosenRoom.type"/>
+            <div class="form-floating mb-3">
+              <select
+                  class="form-select"
+                  id="floatingSelect"
+                  v-model="this.chosenRoom.type"
+                >
+                  <option v-for="item in typeOpt" :key="item" :value="item"> {{ item }}</option>
+                </select>
+              <label class="form-label">Type</label>
+              <span class="text-danger"></span>
+            </div>
+            <!-- <InputField label="Type" placeholder="Type" v-model="this.chosenRoom.type"/> -->
           </div>
         </div>
         <div class="row">
@@ -68,15 +92,17 @@
             <InputField label="Deposit" type="number" placeholder="Deposit" v-model="this.chosenRoom.deposit"/>
           </div>
           <div class="col-4">
-            <InputField label="Status" placeholder="Status" v-model="this.chosenRoom.status"/>
+            <InputField label="Renter" type="number" placeholder="Renter" v-model="this.chosenRoom.renter"/>
           </div>
         </div>
         <div class="row">
           <div class="col-4">
-            <InputField label="Date of hire" type="date" placeholder="Hire date" v-model="this.chosenRoom.day_of_hire"/>
+            <DateInput label="Date of hire" dateformat="DD/MM/YYYY" placeholder="Hire date" v-model="this.chosenRoom.day_of_hire_format_input"/>
+            <!-- <InputField label="Date of hire" type="date" placeholder="Hire date" v-model="this.chosenRoom.day_of_hire"/> -->
           </div>
           <div class="col-4">
-            <InputField label="Expiration Date" type="date" placeholder="Expired date" v-model="this.chosenRoom.expiration_date"/>
+            <DateInput label="Expiration Date" dateformat="DD/MM/YYYY" placeholder="Expired date" v-model="this.chosenRoom.expiration_date_format_input"/>
+            <!-- <InputField label="Expiration Date" type="date" placeholder="Expired date" v-model="this.chosenRoom.expiration_date"/> -->
           </div>
           <div class="col-4">
             <InputField label="Sort" type="number" placeholder="Sort" v-model="this.chosenRoom.sort"/>
@@ -86,6 +112,33 @@
       <div v-else>
         <h1>Hello</h1>
       </div>
+      <hr/>
+      <button
+        class="phuc_button"
+        @click="Edit(this.chosenRoom)"
+        type="button"
+        style="width: 30%; background-color: green"
+      >
+        Update
+      </button>
+    </APIModal>
+    <APIModal @close="toggleRemove" :modalActive="removeActive">
+      <h1>Warning!</h1>
+      <hr />
+      <div v-if="chosenRoom">
+        Are you sure to remove {{ chosenRoom.name }}?
+      </div>
+      <div v-else-if="removing">Removing...</div>
+      <div v-else>Canceling...</div>
+      <hr />
+      <button
+        class="phuc_button"
+        @click="Delete(chosenRoom)"
+        type="button"
+        style="width: 20%;"
+      >
+        Remove
+      </button>
     </APIModal>
     <div>
       <table>
@@ -96,7 +149,11 @@
           <th>Price</th>
           <th>Deposit</th>
           <th>Debt</th>
+          <th>Renters</th>
           <th>Status</th>
+          <th>Date of hire</th>
+          <th>Expiration date</th>
+          <!-- <th>Sort</th> -->
           <th>
             <button
               class="phuc_button phuc_add_button"
@@ -127,8 +184,20 @@
             {{ item.debt }}
           </td>
           <td>
+            {{ item.renter }} / {{ item.capacity }}
+          </td>
+          <td>
             {{ item.status }}
           </td>
+          <td>
+            {{ item.day_of_hire_format }}
+          </td>
+          <td>
+            {{ item.expiration_date_format }}
+          </td>
+          <!-- <td>
+            {{ item.sort }}
+          </td> -->
           <td>
             <button
               @click="toggleEdit(item)"
@@ -156,6 +225,7 @@ import { ref } from 'vue';
 import controller from '@/utils/controller';
 import APIModal from '@/components/APIs/APIModal.vue';
 import InputField from '@/components/APIs/InputField.vue';
+import DateInput from '@/components/APIs/DateInput.vue'
 
 export default {
   name: "RoomView",
@@ -165,6 +235,9 @@ export default {
       error: String,
       removing: Boolean,
       response: {},
+      typeOpt: [
+        'small', 'medium', 'large'
+      ],
       roomData: {
         name: String,
         group: String,
@@ -181,6 +254,12 @@ export default {
       },
     };
   },
+  // computed: {
+  //   orderedRoom: function () {
+  //     return _.orderBy(this.info, 'sort')
+  //   }
+  // },
+
   setup() {
     const addTitle = ref("Add a room");
     const editTitle = ref("Edit room");
@@ -228,10 +307,11 @@ export default {
     var year = d.getFullYear();
     var month = d.getMonth();
     var day = d.getDate();
-    this.roomData.expiration_date = new Date(year+10,month,day);
+    this.roomData.expiration_date = new Date(year+2,month,day);
     this.roomData.status = "available";
     this.roomData.services = [];
     this.roomData.sort = 0;
+    this.roomData.renter = 0;
     this.removing = false;
     this.info = await controller.getRooms();
   },
@@ -243,22 +323,26 @@ export default {
       window.location.reload();
     },
     async Edit(item) {
+      this.chosenRoom.day_of_hire = this.chosenRoom.day_of_hire_format_input;
+      this.chosenRoom.expiration_date = this.chosenRoom.expiration_date_format_input;
+      this.chosenRoom.debt = this.chosenRoom.price - this.chosenRoom.deposit;
       this.chosenRoom.updated_at = Date.now();
       await controller.updateRoom(item._id, this.chosenRoom);
       window.location.reload();
     },
     async Delete(item) {
-      console.log("remove", item._id);
-      // await controller.deleteRoom(item._id);
-      // this.toggleRemove("");
-      // this.removing = true;
-      // window.location.reload();
+      // console.log("remove", item._id);
+      await controller.deleteRoom(item._id);
+      this.toggleRemove("");
+      this.removing = true;
+      window.location.reload();
       // await controller.getServices();
     },
   },
   components: {
     APIModal,
     InputField,
+    DateInput,
   }
 };
 </script>

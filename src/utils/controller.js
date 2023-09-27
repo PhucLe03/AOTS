@@ -14,11 +14,25 @@ function setTitle(title) {
 //   return data;
 // }
 
+//for User
 function realFormater(item, dateFormatString = "DD/MM/YYYY", sexString = ["Male", "Female"]) {
   item.birthday_format = moment(item.birthday).format(dateFormatString);
   item.birthday_format_input = moment(item.birthday).format("YYYY-MM-DD");
   // item.birthday_format_input = item.birthday;
   item.sex_f = item.sex ? sexString[0] : sexString[1];
+}
+
+//for Room
+function unrealFormatter(item) {
+  item.day_of_hire_format = moment(item.day_of_hire).format("DD/MM/YYYY");
+  item.day_of_hire_format_input = moment(item.day_of_hire).format("YYYY-MM-DD");
+  item.expiration_date_format = moment(item.expiration_date).format("DD/MM/YYYY");
+  item.expiration_date_format_input = moment(item.expiration_date).format("YYYY-MM-DD");
+  if (item.type==='small') item.capacity = 1;
+  else if (item.type==='medium') item.capacity = 2;
+  else if (item.type==='large') item.capacity = 4;
+  if (item.renter<item.capacity) item.status = 'available';
+  else item.status = 'full';
 }
 
 async function getUsers() {
@@ -48,8 +62,22 @@ async function deleteUser(id) {
 }
 
 async function getRooms() {
-  const rooms = api.get("/rooms");
-  return (await rooms).data;
+  const data = api.get("/rooms");
+  const rooms = (await data).data;
+  rooms.map((room) => unrealFormatter(room));
+  return rooms;
+}
+
+async function getMTRooms() {
+  const allRooms = await getRooms();
+  const filtered = allRooms.filter(item => item.status.includes('available'))
+  return filtered;
+}
+
+async function addRenterToRoom(id, amount) {
+  const room = await api.get(`/room/${id}`);
+  room.data.renter += amount;
+  await api.put(`/room/${id}`, room.data);
 }
 
 async function createRoom(data) {
@@ -58,7 +86,9 @@ async function createRoom(data) {
 
 async function getRoomByID(id) {
   const room = api.get(`/room/${id}`);
-  return (await room).data;
+  const temp = (await room).data;
+  unrealFormatter(temp);
+  return temp;
 }
 
 async function updateRoom(id,data) {
@@ -109,6 +139,8 @@ export default {
   deleteUser,
   
   getRooms,
+  getMTRooms,
+  addRenterToRoom,
   createRoom,
   getRoomByID,
   updateRoom,
