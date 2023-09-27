@@ -351,6 +351,17 @@ export default {
 
     this.availRooms = await controller.getMTRooms();
     this.info = await controller.getUsers();
+
+    // update room name
+    for (var item in this.info) {
+      // console.log(item,this.info[item])
+      var userID = this.info[item]._id;
+      var tmp = await controller.getRoomByID(this.info[item].room.roomId);
+      var newData = this.info[item];
+      newData.room.name = tmp.name;
+      await controller.updateUser(userID, newData);
+    }
+    this.info = await controller.getUsers();
   },
 
   methods: {
