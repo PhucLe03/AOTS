@@ -7,4 +7,6 @@ router.get('/user/:id/room', userCtl.getUserRoomById)
 router.post('/user', userCtl.createUser)
 router.put('/user/:id', userCtl.updateUser)
 router.delete('/user/:id', userCtl.deleteUser)
+router.get('/users/exportxl', userCtl.ExportToXL)
+// router.get('/users/exportdoc', userCtl.ExportToDOCX)
 module.exports= router
