@@ -17,6 +17,9 @@
             <th>Province</th>
             <th>District</th>
             <th>Commune</th>
+            <th>ID number</th>
+            <th>Phone</th>
+            <th>Main contact</th>
             <th>Room</th>
           </tr>
           <tr>
@@ -36,7 +39,16 @@
               {{ info.commune }}
             </td>
             <td>
-              {{ info.room }}
+              {{ info.idcard }}
+            </td>
+            <td>
+              {{ info.phone }}
+            </td>
+            <td>
+              {{ info.main_contact }}
+            </td>
+            <td>
+              {{ info.room.name }}
               <!-- <a :href="'/api/room/' + item.room._id">{{ info.room }}</a> -->
             </td>
           </tr>

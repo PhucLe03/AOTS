@@ -90,11 +90,16 @@
     >
     <div style="" v-if="editActive">
       <div class="row">
-        <div class="col-7">
+        <div class="col-5">
           <InputField label="Name" placeholder="Name" v-model="this.chosenRenter.name"/>
         </div>
-        <div class="col-5">
+        <div class="col-4">
           <InputField label="Phone" placeholder="Phone" v-model="this.chosenRenter.phone"/>
+        </div>
+        <div class="col-3">
+          <input class="form-check-input" type="checkbox" v-model="this.chosenRenter.main_contact"/>
+          <label class="form-check-label">Main contact</label>
+          <!-- <InputField label="Main contact" type="checkbox" placeholder="Main" v-model="this.chosenRenter.main_contact"/> -->
         </div>
       </div>
       <div class="row">
@@ -202,6 +207,7 @@
           <th>District</th>
           <th>Commune</th>
           <th>Room</th>
+          <th>Main contact</th>
           <th>
             <button
               class="phuc_button phuc_add_button"
@@ -235,6 +241,9 @@
             {{ item.room.name }}
           </td>
           <td>
+            {{ item.main_contact }}
+          </td>
+          <td>
             <button
               @click="toggleEdit(item)"
               class="phuc_button phuc_edit_button phuc_button_icon"
@@ -249,9 +258,20 @@
               <!-- <i class="fa fa-trash"></i> -->
               <span class="material-symbols-outlined"> delete_forever </span>
             </button>
+            <button style="visibility: hidden"></button>
+            <button
+              @click="ExportRenter(item)"
+              class="phuc_button phuc_export_button phuc_button_icon"
+            >
+              <!-- <i class="fa fa-trash"></i> -->
+              <span class="material-symbols-outlined"> description </span>
+            </button>
           </td>
         </tr>
       </table>
+      <button class="phuc_button" @click="ExportData" type="button">
+        Export Data
+      </button>
     </div>
   </div>
 </template>
@@ -346,6 +366,7 @@ export default {
     this.renterData.district = "";
     this.renterData.commune = "";
     this.renterData.address = "";
+    this.renterData.main_contact = true;
     // this.renterData.room.name = "";
     this.removing = false;
 
@@ -365,6 +386,14 @@ export default {
   },
 
   methods: {
+    async ExportData() {
+      // console.log('Export');
+      await controller.RentersExport();
+    },
+    async ExportRenter(item) {
+      // console.log('F',item);
+      await controller.ContractExport(item);
+    },
     async Create() {
       // this.chosenRenter.created_at = Date.now();
       // this.chosenRenter.updated_at = Date.now();
@@ -403,7 +432,7 @@ export default {
     },
     async Delete(item) {
       // console.log("remove", item._id);
-      // await controller.addRenterToRoom(item.room.roomId, -1);
+      await controller.addRenterToRoom(item.room.roomId, -1);
       await controller.deleteUser(item._id);
       this.toggleRemove("");
       this.removing = true;
