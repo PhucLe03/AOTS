@@ -92,7 +92,7 @@ async function ExportToXL(req, res) {
     // // Send the file as a response
     res.download(tempFilePath, "exported-data.xlsx", () => {
       //     // After the file is sent, delete the temporary file
-      fs.unlink(tempFilePath);
+      // fs.unlink(tempFilePath);
     });
   } catch (err) {
     console.error(err); // Log lỗi để kiểm tra
