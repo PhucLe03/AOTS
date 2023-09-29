@@ -37,7 +37,7 @@ function unrealFormatter(item) {
   if (item.type==='small') item.capacity = 1;
   else if (item.type==='medium') item.capacity = 2;
   else if (item.type==='large') item.capacity = 4;
-  if (item.renter<item.capacity) item.status = 'available';
+  if (item.name<item.capacity) item.status = 'available';
   else item.status = 'full';
 }
 
