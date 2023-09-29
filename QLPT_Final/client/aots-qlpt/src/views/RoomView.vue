@@ -19,7 +19,7 @@ import Inputa from "../components/InputField.vue";
       </button>
     </div>
     <div class="relative mt-5 overflow-x-auto">
-      <table class="w-full text-sm text-left text-gray-500 text-center">
+      <table class="w-full text-sm text-left text-gray-500 ">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
           <tr>
             <th scope="col" class="px-6 py-3">No.</th>
@@ -48,27 +48,33 @@ import Inputa from "../components/InputField.vue";
               <p>{{ item.name }}</p>
               <p>{{ item.group }}</p>
             </td>
+
             <td>
               <p>{{ item.type }}</p>
             </td>
+
             <td>
-              <p>Giá: {{ item.price_f }}</p>
-              <p>Cọc: {{ item.deposit_f }}</p>
-              <p>Nợ: {{ item.debt_f }}</p>
+              <p>Price: {{ item.price_f }}</p>
+              <p>Deposit: {{ item.deposit_f }}</p>
+              <p>Debt: {{ item.debt_f }}</p>
             </td>
+
             <td>
-              <p>Số người thuê: {{ item.numberOfRenters }}</p>
+              <p>Number of Renters: {{ item.numberOfRenters }}</p>
               <p>
-                Thời gian thuê: {{ item.day_of_hire_f }} -
+                Day of Hire: {{ item.day_of_hire_f }} -
                 {{ item.expiration_date_f }}
               </p>
             </td>
+
             <td>
               {{ item.services?.map((s) => s.name).join(", ") }}
             </td>
+
             <td>
               {{ item.description }}
             </td>
+
             <td class="flex justify-center gap-2 px-6 py-4">
               <button
                 @click="Update(item)"
@@ -100,81 +106,89 @@ import Inputa from "../components/InputField.vue";
           <div
             class="bg-sky-600 flex items-start justify-between p-4 border-b rounded-t"
           >
-            <h3 class="text-xl font-semibold text-gray-900">
+            <h3 class="text-xl font-semibold text-white">
               {{ roomModal.txtTitle }}
             </h3>
           </div>
           <!-- Modal body -->
           <div class="grid grid-cols-12 gap-3 p-6">
-            <div class="col-span-12">
+            <div class="col-span-12 shadow p-2">
               <Inputa
-                label="Tên Phòng"
+                label="Room Name"
                 type="text"
-                placeholder="Tên Phòng"
+                placeholder="Enter room name"
                 v-model="roomModal.dataRoom.name"
+                class = "text-stone-950"
               />
             </div>
-            <div class="col-span-6">
+            <div class="col-span-6 shadow p-2">
               <Inputa
-                label="Nhóm"
+                label="Group"
                 type="text"
-                placeholder="Tầng 1, Tầng 2, Tầng 3,..."
+                placeholder="Floor 1, Floor 2, Floor 3,..."
                 v-model="roomModal.dataRoom.group"
+                class = "text-stone-950"
               />
             </div>
-            <div class="col-span-6">
+            <div class="col-span-6 shadow p-2">
               <Inputa
-                label="Loại phòng"
+                label="Type of Room"
                 type="text"
-                placeholder="Đã thuê, Còn trống, Đang sửa chữa,..."
+                placeholder="Rented, Empty, or being Repaied,..."
                 v-model="roomModal.dataRoom.type"
+                class = "text-stone-950"
               />
             </div>
-            <div class="col-span-4">
+            <div class="col-span-4 shadow p-2">
               <Inputa
-                label="Giá"
+                label="Price"
                 type="number"
-                placeholder="Giá"
+                placeholder="Enter price"
                 v-model="roomModal.dataRoom.price"
+                class = "text-stone-950"
               />
             </div>
-            <div class="col-span-4">
+            <div class="col-span-4 shadow p-2">
               <Inputa
-                label="Cọc"
+                label="Deposit"
                 type="number"
-                placeholder="Cọc"
+                placeholder="Enter deposit"
                 v-model="roomModal.dataRoom.deposit"
+                class = "text-stone-950"
               />
             </div>
-            <div class="col-span-4">
+            <div class="col-span-4 shadow p-2">
               <Inputa
-                label="Còn nợ"
+                label="Debt"
                 type="number"
-                placeholder="Còn nợ"
+                placeholder="Enter debt"
                 v-model="roomModal.dataRoom.debt"
+                class = "text-stone-950"
               />
             </div>
-            <div class="col-span-6">
+            <div class="col-span-6 shadow p-2">
               <Inputa
-                label="Còn nợ"
+                label="Date of Hire"
                 type="date"
                 v-model="roomModal.dataRoom.day_of_hire"
+                class = "text-stone-950"
               />
             </div>
-            <div class="col-span-6">
+            <div class="col-span-6 shadow p-2">
               <Inputa
-                label="Ngày trả phòng"
+                label="Expiration Date"
                 type="date"
                 v-model="roomModal.dataRoom.expiration_date"
+                class = "text-stone-950"
               />
             </div>
-            <div class="col-span-12">
+            <div class="col-span-12 shadow p-2">
               <label
                 for="services"
                 class="block mb-2 text-sm font-medium text-gray-900"
-                >Dịch vụ</label
+                >Service</label
               >
-              <div class="grid grid-cols-4 gap-6">
+              <div class="grid grid-cols-4 gap-6 text-stone-950">
                 <div v-for="(item, index) in services" :key="index">
                   <input
                     type="checkbox"
@@ -192,12 +206,13 @@ import Inputa from "../components/InputField.vue";
                 </div>
               </div>
             </div>
-            <div class="col-span-12">
+            <div class="col-span-12 shadow p-2">
               <Inputa
-                label="Ghi chú"
+                label="Note"
                 type="text"
-                placeholder="Ghi chú"
+                placeholder="Note something here"
                 v-model="roomModal.dataRoom.description"
+                class = "text-stone-950"
               />
             </div>
           </div>
@@ -226,144 +241,126 @@ import Inputa from "../components/InputField.vue";
   </div>
 </template>
 
+
 <script>
 import axios from "../fetch/axios";
 import { Modal } from "flowbite";
 import moment from "moment";
 
 export default {
-  name: "rooms",
-  data() {
-    return {
-      rooms: [],
-      services: [],
-      roomModal: {
-        txtTitle: "",
-        submitType: null,
-        dataRoom: {
-          name: null,
-          group: null,
-          type: null,
-          price: null,
-          deposit: null,
-          debt: null,
-          day_of_hire: null,
-          expiration_date: null,
-          description: null,
-          services: [],
+    name: "rooms",
+    data() {
+        return {
+            rooms: [],
+            services: [],
+            roomModal: {
+                txtTitle: "",
+                submitType: null,
+                dataRoom: {
+                    name: null,
+                    group: null,
+                    type: null,
+                    price: null,
+                    deposit: null,
+                    debt: null,
+                    day_of_hire: null,
+                    expiration_date: null,
+                    description: null,
+                    services: [],
+                },
+            },
+            modal: null,
+        };
+    },
+    mounted() {
+        this.getRooms();
+        this.getServices();
+        this.modal = new Modal(document.querySelector("#roomModal"));
+    },
+    methods: {
+        formatMoney(value) {
+            return value
+                ? value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                : null;
         },
-      },
-      modal: null,
-    };
-  },
-  async mounted() {
-    this.getRooms();
-    this.getServices();
-    this.modal = new Modal(document.querySelector("#roomModal"));
-  },
-  methods: {
-    async getServices() {
-      const res = await axios.get("/service");
-      this.services = res.data;
-    },
-    async getRooms() {
-      const res = await axios.get("/room");
-      this.rooms = await res.data.map((item) => {
-        item.price_f = this.formatMoney(item.price);
-        item.deposit_f = this.formatMoney(item.deposit);
-        item.debt_f = this.formatMoney(item.debt);
-        item.day_of_hire_f = this.formatDate(item.day_of_hire);
-        item.expiration_date_f = this.formatDate(item.expiration_date);
-        return item;
-      });
-    },
-    formatMoney(value) {
-      return value
-        ? value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-        : null;
-    },
-    formatDate(value) {
-      return value ? moment(value).format("DD/MM/YYYY") : null;
-    },
-    Create() {
-      this.modal.toggle();
-      this.roomModal = {
-        txtTitle: "Thêm mới phòng thuê",
-        submitType: "create",
-        dataRenter: {
-          name: null,
-          group: null,
-          type: null,
-          price: null,
-          deposit: null,
-          debt: null,
-          day_of_hire: null,
-          expiration_date: null,
-          description: null,
-          services: [],
+        formatDate(value) {
+            return value ? moment(value).format("DD/MM/YYYY") : null;
         },
-      };
-    },
-    Update(renterItem) {
-      console.log(renterItem._id);
-      this.modal.toggle();
-
-      this.roomModal = {
-        txtTitle: "Chỉnh sửa khách trọ",
-        submitType: "update",
-        dataRenter: {
-          _id: renterItem._id,
-          name: renterItem.name,
-          phone: renterItem.phone,
-          id_card: renterItem.id_card,
-          birth_day: moment(renterItem.birth_day).format("YYYY-MM-DD"),
-          sex: renterItem.sex,
-          // depossexit: renterItem.depossexit,
-          province: renterItem.province,
-          district: renterItem.district,
-          commune: renterItem.commune,
-          address: renterItem.address,
-          room: renterItem.room._id,
-          main_contact: renterItem.main_contact,
-          status: renterItem.status,
+        async getRooms() {
+            const res = await axios.get("/room");
+            this.rooms = await res.data.map((item) => {
+                item.price_f = this.formatMoney(item.price);
+                item.deposit_f = this.formatMoney(item.deposit);
+                item.debt_f = this.formatMoney(item.debt);
+                item.day_of_hire_f = this.formatDate(item.day_of_hire);
+                item.expiration_date_f = this.formatDate(item.expiration_date);
+                return item;
+            });
         },
-      };
-    },
-    async Submit() {
-      const submitType = this.roomModal.submitType;
-      const data = this.roomModal.dataRenter;
-      if (submitType === "create") {
-        await axios.post("renter/store", data);
-      } else {
-        const { _id, ...rest } = data;
-        await axios.put(`renter/update/${_id}`, rest);
-      }
-      await this.getRenters();
-      this.modal.hide();
-    },
-    async Delete(_id) {
-      await axios.delete(`renter/delete/${_id}`);
-      await this.getRenters();
-    },
-    async Export() {
-      // Make a GET request to the Node.js endpoint
-      const response = await axios.get("/renter/export", {
-        responseType: "blob", // Specify responseType as 'blob' to receive binary data
-      });
+        async getServices() {
+            const res = await axios.get("/service");
+            this.services = res.data;
+        },
+        Create() {
+            this.modal.toggle();
+            this.roomModal = {
+                txtTitle: "Add New Room",
+                submitType: "create",
+                dataRoom: {
+                    name: null,
+                    group: null,
+                    type: null,
+                    price: null,
+                    deposit: null,
+                    debt: null,
+                    day_of_hire: null,
+                    expiration_date: null,
+                    description: null,
+                    services: [],
+                },
+            };
+        },
+        Update(roomItem) {
+            this.modal.toggle();
 
-      // Create a Blob and create a download link
-      const blob = new Blob([response.data], {
-        type: "application/octet-stream",
-      });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "renters.xlsx";
-      a.click();
-
-      // Clean up by revoking the Object URL
-      window.URL.revokeObjectURL(url);
+            this.roomModal = {
+                txtTitle: "Edit Room",
+                submitType: "update",
+                dataRoom: {
+                    _id: roomItem._id,
+                    name: roomItem.name,
+                    group: roomItem.group,
+                    type: roomItem.type,
+                    price: roomItem.price,
+                    deposit: roomItem.deposit,
+                    debt: roomItem.debt,
+                    day_of_hire: roomItem.day_of_hire
+                        ? moment(roomItem.day_of_hire).format("YYYY-MM-DD")
+                        : null,
+                    expiration_date: roomItem.expiration_date
+                        ? moment(roomItem.expiration_date).format("YYYY-MM-DD")
+                        : null,
+                    description: roomItem.description,
+                    services: roomItem.services.map((s) => s._id),
+                },
+            };
+        },
+        async Submit() {
+            const submitType = this.roomModal.submitType;
+            const data = this.roomModal.dataRoom;
+            if (submitType === "create") {
+                await axios.post("room/store", data);
+            } else {
+                const { _id, ...rest } = data;
+                await axios.put(`room/update/${_id}`, rest);
+            }
+            await this.getRooms();
+            this.modal.hide();
+        },
+        async Delete(_id) {
+            await axios.delete(`room/delete/${_id}`);
+            await this.getRooms();
+        },
     },
-  },
 };
 </script>

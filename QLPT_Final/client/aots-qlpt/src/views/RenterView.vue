@@ -11,12 +11,13 @@ import Inputa from "../components/InputField.vue";
         Renters List
       </h1>
       <button
-        class="py-2 px-3 bg-sky-100 text-stone-950 text-sm font-semibold rounded-full shadow focus:outline-none"
+        class="px-5 p-1.5 rounded-full hover:bg-sky-100 font-bold text-stone-950 shadow focus:outline-none bg-green-500"
         type="button"
         @click="Export"
       >
         Export File
       </button>
+
       <button
         class="px-5 p-1.5 rounded-full hover:bg-sky-100 font-bold text-stone-950 shadow focus:outline-none"
         type="button"
@@ -25,6 +26,7 @@ import Inputa from "../components/InputField.vue";
         Add renter
       </button>
     </div>
+
     <div class="relative mt-5 overflow-x-auto">
       <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -55,10 +57,10 @@ import Inputa from "../components/InputField.vue";
               {{ item.name }}
             </td>
             <td class="px-6 py-4">
-              <p>SĐT: {{ item.phone }}</p>
-              <p>CCCD: {{ item.id_card }}</p>
-              <p>Ngày sinh: {{ item.birth_day_f }}</p>
-              <p>Giới tính: {{ item.sex_f }}</p>
+              <p>Phone: {{ item.phone }}</p>
+              <p>ID: {{ item.id_card }}</p>
+              <p>Date of Birth: {{ item.birth_day_f }}</p>
+              <p>Gender: {{ item.sex_f }}</p>
             </td>
             <td class="px-6 py-4">
               {{ item.address_f }}
@@ -100,7 +102,9 @@ import Inputa from "../components/InputField.vue";
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow">
           <!-- Modal header -->
-          <div class="bg-sky-600 flex items-start justify-between p-4 border-b rounded-t">
+          <div
+            class="bg-sky-600 flex items-start justify-between p-4 border-b rounded-t"
+          >
             <h3 class="text-xl font-semibold text-white">
               {{ renterModal.txtTitle }}
             </h3>
@@ -112,41 +116,45 @@ import Inputa from "../components/InputField.vue";
                 <Inputa
                   label="Full Name"
                   type="text"
-                  placeholder="Họ và Tên"
+                  placeholder="Enter your name"
                   v-model="renterModal.dataRenter.name"
+                  class="text-stone-950"
                 />
               </div>
             </div>
             <div class="flex justify-between gap-6">
               <div class="w-full shadow p-2">
                 <Inputa
-                  label="Số điện thoại"
+                  label="Phone number"
                   type="text"
-                  placeholder="Số điện thoại"
+                  placeholder="Enter your phone number"
                   v-model="renterModal.dataRenter.phone"
+                  class="text-stone-950"
                 />
               </div>
-              <div class="w-full">
+              <div class="w-full shadow p-2">
                 <Inputa
-                  label="Số CMND/CCCD"
+                  label="Identifier"
                   type="text"
-                  placeholder="Số CMND/CCCD"
+                  placeholder="Enter ID"
                   v-model="renterModal.dataRenter.id_card"
+                  class="text-stone-950"
                 />
               </div>
             </div>
             <div class="flex justify-between gap-6">
-              <div class="w-full">
+              <div class="w-full shadow p-2">
                 <Inputa
-                  label="Ngày sinh"
+                  label="Date of Birth"
                   type="date"
-                  placeholder="Ngày sinh"
+                  placeholder="Enter your date of birth"
                   v-model="renterModal.dataRenter.birth_day"
+                  class="text-stone-950"
                 />
               </div>
-              <div class="w-full">
+              <div class="w-full shadow p-2">
                 <label class="block mb-2 text-sm font-medium text-gray-900"
-                  >Giới tính</label
+                  >Gender</label
                 >
                 <div class="flex items-center gap-6">
                   <div>
@@ -157,7 +165,7 @@ import Inputa from "../components/InputField.vue";
                       value="true"
                       v-model="renterModal.dataRenter.sex"
                     />
-                    <label for="s_t">Nam</label>
+                    <label class="text-stone-950" for="s_t">Male</label>
                   </div>
                   <div>
                     <input
@@ -167,55 +175,60 @@ import Inputa from "../components/InputField.vue";
                       value="false"
                       v-model="renterModal.dataRenter.sex"
                     />
-                    <label for="s_f">Nữ</label>
+                    <label class="text-stone-950" for="s_f">Female</label>
                   </div>
                 </div>
               </div>
             </div>
             <div class="flex justify-between gap-6">
-              <div class="w-full">
+              <div class="w-full shadow p-2">
                 <Inputa
-                  label="Tỉnh"
+                  label="Province"
                   type="text"
-                  placeholder="Tỉnh"
+                  placeholder="Enter your province"
                   v-model="renterModal.dataRenter.province"
+                  class="text-stone-950"
                 />
               </div>
-              <div class="w-full">
+              <div class="w-full shadow p-2">
                 <Inputa
-                  label="Huyện"
+                  label="District"
                   type="text"
-                  placeholder="Huyện"
+                  placeholder="Enter your district"
                   v-model="renterModal.dataRenter.district"
+                  class="text-stone-950"
                 />
               </div>
-              <div class="w-full">
+              <div class="w-full shadow p-2">
                 <Inputa
-                  label="Xã"
+                  label="Commune"
                   type="text"
-                  placeholder="Xã"
+                  placeholder="Enter your commune"
                   v-model="renterModal.dataRenter.commune"
+                  class="text-stone-950"
                 />
               </div>
             </div>
-            <div>
+            <div class="shadow p-2">
               <Inputa
-                label="Số nhà, Tên đường"
+                label="Address"
                 type="text"
-                placeholder="Số nhà, Tên đường"
+                placeholder="Enter your address"
                 v-model="renterModal.dataRenter.address"
+                class="text-stone-950"
               />
             </div>
             <div class="flex justify-between gap-6">
-              <div class="w-full">
+              <div class="w-full shadow p-2">
                 <Inputa
-                  label="Trạng thái"
+                  label="State"
                   type="text"
-                  placeholder="Trạng thái"
+                  placeholder="Enter your state"
                   v-model="renterModal.dataRenter.status"
+                  class="text-stone-950"
                 />
               </div>
-              <div class="flex items-center w-full">
+              <div class="flex items-center w-full shadow p-2">
                 <input
                   type="checkbox"
                   name="main_contact"
@@ -227,15 +240,15 @@ import Inputa from "../components/InputField.vue";
                 <label
                   for="main_contact"
                   class="text-sm font-medium text-gray-900"
-                  >Liên hệ chính</label
+                  >Main contact</label
                 >
               </div>
             </div>
             <div>
               <label class="block mb-2 text-sm font-medium text-gray-900"
-                >Phòng</label
+                >Room</label
               >
-              <div class="grid grid-cols-3 gap-3">
+              <div class="grid grid-cols-3 gap-3 text-stone-950">
                 <div v-for="(item, index) in rooms" :key="index">
                   <input
                     type="radio"
@@ -294,7 +307,6 @@ export default {
           phone: null,
           id_card: null,
           birth_day: null,
-          // depossexit: null,
           province: null,
           district: null,
           commune: null,
@@ -336,7 +348,6 @@ export default {
           phone: null,
           id_card: null,
           birth_day: null,
-          // depossexit: null,
           province: null,
           district: null,
           commune: null,
@@ -348,20 +359,20 @@ export default {
       };
     },
     Update(renterItem) {
-      console.log(renterItem._id);
       this.modal.toggle();
 
       this.renterModal = {
-        txtTitle: "Chỉnh sửa khách trọ",
+        txtTitle: "Edit Renter",
         submitType: "update",
         dataRenter: {
           _id: renterItem._id,
           name: renterItem.name,
           phone: renterItem.phone,
           id_card: renterItem.id_card,
-          birth_day: moment(renterItem.birth_day).format("YYYY-MM-DD"),
+          birth_day: renterItem.birth_day
+            ? moment(renterItem.birth_day).format("YYYY-MM-DD")
+            : null,
           sex: renterItem.sex,
-          // depossexit: renterItem.depossexit,
           province: renterItem.province,
           district: renterItem.district,
           commune: renterItem.commune,
@@ -381,6 +392,7 @@ export default {
         const { _id, ...rest } = data;
         await axios.put(`renter/update/${_id}`, rest);
       }
+
       await this.getRenters();
       this.modal.hide();
     },
@@ -388,6 +400,7 @@ export default {
       await axios.delete(`renter/delete/${_id}`);
       await this.getRenters();
     },
+
     async Export() {
       // Make a GET request to the Node.js endpoint
       const response = await axios.get("/renter/export", {
@@ -406,6 +419,31 @@ export default {
 
       // Clean up by revoking the Object URL
       window.URL.revokeObjectURL(url);
+    },
+
+    async Export_d() {
+      try {
+        // Make a GET request to the Node.js endpoint for exporting DOCX
+        const response = await axios.get("/renter/export", {
+          responseType: "blob", // Specify responseType as 'blob' to receive binary data
+        });
+
+        // Create a Blob and create a download link for DOCX
+        const blob = new Blob([response.data], {
+          type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // Specify the correct MIME type for DOCX
+        });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "renters.docx"; // Change the file name to .docx
+        a.click();
+
+        // Clean up by revoking the Object URL
+        window.URL.revokeObjectURL(url);
+      } catch (error) {
+        console.error(error);
+        // Handle errors as needed
+      }
     },
   },
 };
